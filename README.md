@@ -36,7 +36,7 @@ Add the following configuration to the ~/.vimrc file, then execute `PluginInstal
 Plugin 'hardhackerlabs/theme-vim', { 'name': 'hardhacker' }
 ```
 
-Note that before installing the theme, you need to have installed and configured **Vundle** package management
+Note that before installing the theme, you need to have installed and configured **Vundle** plugin management
 
 Add the following configuration to the `~/.vimrc` file, then restart Vim
 
