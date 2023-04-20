@@ -2,11 +2,11 @@
 
 > Supported vim's gui and term environments
 
-![](./media/preview1.png)
+![](./media/preview.jpeg)
 
 ## Install
 
-#### Git Clone
+#### Git clone
 
 ```bash
 git clone https://github.com/hardhackerlabs/theme-vim.git
@@ -27,7 +27,7 @@ colorscheme hardhacker
 Add the following configuration to the ~/.vimrc file, then execute `PluginInstall` command to install hardhacker theme
 
 ```
-Plugin 'hardhackerlabs/theme-vim'
+Plugin 'hardhackerlabs/theme-vim', { 'name': 'hardhacker' }
 ```
 
 Note that before installing the theme, you need to have installed and configured **Vundle** package management

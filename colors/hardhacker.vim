@@ -10,7 +10,7 @@ endif
 set background=dark
 let g:colors_name = "hardhacker"
 
-if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 256
+if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolors)
   finish
 endif
 
@@ -43,10 +43,8 @@ let g:cyan256       = "123"
 "
 execute 'hi Cursor ctermfg='.g:fg256.' ctermbg='.g:red256.' cterm=NONE guifg='.g:fg.' guibg='.g:red.' gui=NONE'
 execute 'hi CursorLine ctermfg='.g:red256.' ctermbg='.g:selection256.' cterm=NONE guifg='.g:red.' guibg='.g:selection.' gui=NONE'
-
 execute 'hi CursorColumn ctermfg=NONE ctermbg='.g:bg256.' cterm=NONE guifg=NONE guibg='.g:bg.' gui=NONE'
 hi! link ColorColumn CursorColumn
-
 execute 'hi LineNr ctermfg=102 ctermbg='.g:bg256.' cterm=NONE guifg=#84898c guibg='.g:bg.' gui=NONE'
 execute 'hi Visual ctermfg=NONE ctermbg='.g:purple256.' cterm=NONE guifg=NONE guibg='.g:purple.' gui=NONE'
 execute 'hi Directory ctermfg='.g:blue256.' ctermbg=NONE cterm=NONE guifg='.g:blue.' guibg=NONE gui=NONE'
@@ -54,14 +52,22 @@ execute 'hi IncSearch ctermfg='.g:bg256.' ctermbg='.g:yellow256.' cterm=NONE gui
 execute 'hi Search ctermfg='.g:bg256.' ctermbg='.g:yellow256.' cterm=underline guifg='.g:bg.' guibg='.g:yellow.' gui=underline'
 execute 'hi VertSplit ctermfg='.g:selection256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:selection.' guibg='.g:bg.' gui=NONE'
 execute 'hi MatchParen ctermfg=180 ctermbg=NONE cterm=underline guifg=#dda790 guibg=NONE gui=underline'
-execute 'hi StatusLine ctermfg='.g:fg256.' ctermbg='.g:selection256.' cterm=bold guifg='.g:fg.' guibg='.g:selection.' gui=bold'
+execute 'hi StatusLine ctermfg='.g:fg256.' ctermbg='.g:selection256.' cterm=bold guifg='.g:fg.' guibg='.g:selection.' gui=NONE'
 execute 'hi StatusLineNC ctermfg='.g:fg256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:fg.' guibg='.g:bg.' gui=NONE'
 execute 'hi Pmenu ctermfg='.g:fg256.' ctermbg='.g:selection256.' cterm=NONE guifg='.g:fg.' guibg='.g:selection.' gui=NONE'
 execute 'hi PmenuSel ctermfg='.g:fg256.' ctermbg='.g:purple256.' cterm=NONE guifg='.g:fg.' guibg='.g:purple.' gui=NONE'
 execute 'hi Folded ctermfg='.g:fg256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:fg.' guibg='.g:bg.' gui=NONE'
-
 execute 'hi Normal ctermfg='.g:fg256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:fg.' guibg='.g:bg.' gui=NONE'
 execute 'hi EndOfBuffer ctermfg='.g:selection256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:selection.' guibg='.g:bg.' gui=NONE'
+
+function IsValid(...)
+    if ! exists('g:colors_name') || g:colors_name !=# 'hardhacker'
+        return 0
+    elseif a:0 > 0 && (exists('b:current_syntax') && index(a:000, b:current_syntax) != -1)
+        return 1
+    endif
+    return 0
+endfunction
 
 " Set text highlight
 "
