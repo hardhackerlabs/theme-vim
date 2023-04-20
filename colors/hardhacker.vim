@@ -14,54 +14,133 @@ if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolo
   finish
 endif
 
+
 " Palette
 "
-let g:bg            = "#282433"
-let g:fg            = "#eee9fc"
-let g:selection     = "#3f3951"
-let g:comment       = "#777383"
-let g:red           = "#e965a5"
-let g:green         = "#b1f2a7"
-let g:yellow        = "#ebde76"
-let g:blue          = "#b1baf4"
-let g:purple        = "#e192ef"
-let g:cyan          = "#b3f4f3"
-let g:bright_black  = "#b3f4f3"
+let s:bg            = "#282433"
+let s:fg            = "#eee9fc"
+let s:selection     = "#3f3951"
+let s:comment       = "#777383"
+let s:red           = "#e965a5"
+let s:green         = "#b1f2a7"
+let s:yellow        = "#ebde76"
+let s:blue          = "#b1baf4"
+let s:purple        = "#e192ef"
+let s:cyan          = "#b3f4f3"
 
-let g:bg256         = "235"
-let g:fg256         = "255"
-let g:selection256  = "238"
-let g:comment256    = "243"
-let g:red256        = "205" "212
-let g:green256      = "157"
-let g:yellow256     = "227"
-let g:blue256       = "153"
-let g:purple256     = "219"
-let g:cyan256       = "123"
+let s:bg2           = "235"
+let s:fg2           = "255"
+let s:selection2    = "238"
+let s:comment2      = "243"
+let s:red2          = "205" "212
+let s:green2        = "157"
+let s:yellow2       = "227"
+let s:blue2         = "153"
+let s:purple2       = "219"
+let s:cyan2         = "123"
+
+let s:none          = "NONE"
 
 " Set environment style
 "
-execute 'hi Cursor ctermfg='.g:fg256.' ctermbg='.g:red256.' cterm=NONE guifg='.g:fg.' guibg='.g:red.' gui=NONE'
-execute 'hi CursorLine ctermfg='.g:red256.' ctermbg='.g:selection256.' cterm=NONE guifg='.g:red.' guibg='.g:selection.' gui=NONE'
-execute 'hi CursorColumn ctermfg=NONE ctermbg='.g:bg256.' cterm=NONE guifg=NONE guibg='.g:bg.' gui=NONE'
-hi! link ColorColumn CursorColumn
-execute 'hi LineNr ctermfg=102 ctermbg='.g:bg256.' cterm=NONE guifg=#84898c guibg='.g:bg.' gui=NONE'
-execute 'hi Visual ctermfg=NONE ctermbg='.g:purple256.' cterm=NONE guifg=NONE guibg='.g:purple.' gui=NONE'
-execute 'hi Directory ctermfg='.g:blue256.' ctermbg=NONE cterm=NONE guifg='.g:blue.' guibg=NONE gui=NONE'
-execute 'hi IncSearch ctermfg='.g:bg256.' ctermbg='.g:yellow256.' cterm=NONE guifg='.g:bg.' guibg='.g:yellow.' gui=NONE'
-execute 'hi Search ctermfg='.g:bg256.' ctermbg='.g:yellow256.' cterm=underline guifg='.g:bg.' guibg='.g:yellow.' gui=underline'
-execute 'hi VertSplit ctermfg='.g:selection256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:selection.' guibg='.g:bg.' gui=NONE'
-execute 'hi MatchParen ctermfg=180 ctermbg=NONE cterm=underline guifg=#dda790 guibg=NONE gui=underline'
-execute 'hi StatusLine ctermfg='.g:fg256.' ctermbg='.g:selection256.' cterm=bold guifg='.g:fg.' guibg='.g:selection.' gui=NONE'
-execute 'hi StatusLineNC ctermfg='.g:fg256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:fg.' guibg='.g:bg.' gui=NONE'
-execute 'hi Pmenu ctermfg='.g:fg256.' ctermbg='.g:selection256.' cterm=NONE guifg='.g:fg.' guibg='.g:selection.' gui=NONE'
-execute 'hi PmenuSel ctermfg='.g:fg256.' ctermbg='.g:purple256.' cterm=NONE guifg='.g:fg.' guibg='.g:purple.' gui=NONE'
-execute 'hi Folded ctermfg='.g:fg256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:fg.' guibg='.g:bg.' gui=NONE'
-execute 'hi Normal ctermfg='.g:fg256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:fg.' guibg='.g:bg.' gui=NONE'
-execute 'hi EndOfBuffer ctermfg='.g:selection256.' ctermbg='.g:bg256.' cterm=NONE guifg='.g:selection.' guibg='.g:bg.' gui=NONE'
+function s:hi_group(group, termfg, termbg, guifg, guibg)
+    let l:hl_fields = [
+        \ 'hi',
+        \ a:group,
+        \ 'ctermfg=' . a:termfg,
+        \ 'ctermbg=' . a:termbg,
+        \ 'cterm=NONE',
+        \ 'guifg=' . a:guifg,
+        \ 'guibg=' . a:guibg,
+        \ 'gui=NONE'
+        \]
+    execute join(l:hl_fields, ' ')
+endfunction
 
-function IsValid(...)
-    if ! exists('g:colors_name') || g:colors_name !=# 'hardhacker'
+call s:hi_group('Cursor', s:fg2, s:red2, s:fg, s:red)
+call s:hi_group('CursorLine', s:red2, s:selection2, s:red, s:selection)
+call s:hi_group('CursorColumn', s:none, s:bg2,  s:none, s:bg)
+call s:hi_group('ColorColumn', s:none, s:bg2,  s:none, s:bg)
+call s:hi_group('LineNr', '102', s:bg2, '#84898c', s:bg)
+call s:hi_group('Visual',  s:none, s:purple2, s:none, s:purple)
+call s:hi_group('Directory', s:blue2, s:none, s:blue, s:none)
+call s:hi_group('IncSearch', s:bg2, s:yellow2, s:bg, s:yellow)
+call s:hi_group('VertSplit', s:selection2, s:bg2, s:selection, s:bg)
+call s:hi_group('StatusLine', s:fg2, s:selection2, s:fg, s:selection)
+call s:hi_group('StatusLineNC', s:fg2, s:bg2, s:fg, s:bg)
+call s:hi_group('Pmenu', s:fg2, s:selection2, s:fg, s:selection)
+call s:hi_group('PmenuSel',s:fg2, s:purple2, s:fg, s:purple)
+call s:hi_group('Folded', s:fg2, s:bg2, s:fg, s:bg)
+call s:hi_group('Normal', s:fg2, s:bg2, s:fg, s:bg)
+call s:hi_group('EndOfBuffer', s:selection2, s:bg2, s:selection, s:bg) 
+
+execute 'hi Search ctermfg='.s:bg2.' ctermbg='.s:yellow2.' cterm=underline guifg='.s:bg.' guibg='.s:yellow.' gui=underline'
+execute 'hi MatchParen ctermfg=180 ctermbg=NONE cterm=underline guifg=#dda790 guibg=NONE gui=underline'
+
+" Set text highlight
+"
+function s:hi_text_group(group, ctermfg, guifg)
+    call s:hi_group(a:group, a:ctermfg, s:none, a:guifg, s:none)
+endfunction
+
+call s:hi_text_group('HardHacker_Red', s:red2, s:red)
+call s:hi_text_group('HardHacker_Purple', s:purple2, s:purple)
+call s:hi_text_group('HardHacker_Blue', s:blue2,s:blue)
+call s:hi_text_group('HardHacker_Yellow', s:yellow2, s:yellow)
+call s:hi_text_group('HardHacker_Cyan',s:cyan2, s:cyan)
+call s:hi_text_group('HardHacker_Green', s:green2, s:green)
+call s:hi_text_group('HardHacker_FG', s:fg2, s:fg)
+call s:hi_text_group('Comment',s:comment2, s:comment)
+call s:hi_text_group('ErrorMsg', s:none, s:none)
+call s:hi_group('Error', s:fg2, s:red2, s:fg, s:red)
+
+execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline'
+execute 'hi Todo ctermfg='.s:yellow2.' ctermbg=NONE cterm=inverse,bold guifg='.s:yellow.' guibg=NONE gui=inverse,bold,italic'
+
+hi! link String         HardHacker_Green
+hi! link Constant       HardHacker_Purple
+hi! link Character      HardHacker_Yellow
+hi! link Number         HardHacker_Yellow
+hi! link Boolean        HardHacker_Yellow
+hi! link Float          HardHacker_Yellow
+
+hi! link Function       HardHacker_Blue
+hi! link Identifier     HardHacker_Blue
+
+hi! link Exception      HardHacker_Red
+hi! link Repeat         HardHacker_Red
+hi! link Statement      HardHacker_Red
+hi! link Conditional    HardHacker_Red
+hi! link Label          HardHacker_Red
+hi! link Operator       HardHacker_FG  
+hi! link Keyword        HardHacker_Red
+
+hi! link Type           HardHacker_Cyan
+hi! link Delimiter      HardHacker_FG
+
+hi! link Tag            HardHacker_Cyan
+hi! link Define         HardHacker_Purple
+hi! link Special        HardHacker_Purple
+hi! link SpecialKey     HardHacker_Purple
+hi! link SpecialComment HardHacker_Cyan
+hi! link StorageClass   HardHacker_Purple
+hi! link Structure      HardHacker_Purple
+hi! link Macro          HardHacker_Purple
+hi! link PreCondit      HardHacker_Purple
+hi! link Include        HardHacker_Red
+hi! link Typedef        HardHacker_Purple
+
+hi! link DiffAdd        HardHacker_Green
+hi! link DiffDelete     HardHacker_Red
+hi! link DiffText       HardHacker_FG
+hi! link DiffChange     HardHacker_Yellow
+hi! link WarningMsg     HardHacker_Yellow
+hi! link PreProc        HardHacker_Purple
+hi! link PreCondit      HardHacker_Purple
+hi! link Title          HardHacker_FG
+
+function s:is_valid(...)
+    if ! exists('s:colors_name') || s:colors_name !=# 'hardhacker'
         return 0
     elseif a:0 > 0 && (exists('b:current_syntax') && index(a:000, b:current_syntax) != -1)
         return 1
@@ -69,106 +148,47 @@ function IsValid(...)
     return 0
 endfunction
 
-" Set text highlight
-"
-execute 'hi HH_Red ctermfg='.g:red256.' ctermbg=NONE cterm=NONE guifg='.g:red.' guibg=NONE gui=NONE'
-execute 'hi HH_Purple ctermfg='.g:purple256.' ctermbg=NONE cterm=NONE guifg='.g:purple.' guibg=NONE gui=NONE'
-execute 'hi HH_Blue ctermfg='.g:blue256.' ctermbg=NONE cterm=NONE guifg='.g:blue.' guibg=NONE gui=NONE'
-execute 'hi HH_Yellow ctermfg='.g:yellow256.' ctermbg=NONE cterm=NONE guifg='.g:yellow.' guibg=NONE gui=NONE'
-execute 'hi HH_Cyan ctermfg='.g:cyan256.' ctermbg=NONE cterm=NONE guifg='.g:cyan.' guibg=NONE gui=NONE'
-execute 'hi HH_Green ctermfg='.g:green256.' ctermbg=NONE cterm=NONE guifg='.g:green.' guibg=NONE gui=NONE'
-execute 'hi HH_FG ctermfg='.g:fg256.' ctermbg=NONE cterm=NONE guifg='.g:fg.' guibg=NONE gui=NONE'
-
-execute 'hi Comment ctermfg='.g:comment256.' ctermbg=NONE cterm=NONE guifg='.g:comment.' guibg=NONE gui=italic'
-execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline'
-execute 'hi Todo ctermfg='.g:yellow256.' ctermbg=NONE cterm=inverse,bold guifg='.g:yellow.' guibg=NONE gui=inverse,bold,italic'
-
-execute 'hi ErrorMsg ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE'
-execute 'hi Error ctermfg='.g:fg256.' ctermbg='.g:red256.' cterm=NONE guifg='.g:fg.' guibg='.g:red.' gui=NONE'
-
-hi! link String     HH_Green
-hi! link Constant   HH_Purple
-hi! link Character  HH_Yellow
-hi! link Number     HH_Yellow
-hi! link Boolean    HH_Yellow
-hi! link Float      HH_Yellow
-
-hi! link Function   HH_Blue
-hi! link Identifier HH_Blue
-
-hi! link Exception    HH_Red
-hi! link Repeat       HH_Red
-hi! link Statement    HH_Red
-hi! link Conditional  HH_Red
-hi! link Label        HH_Red
-hi! link Operator     HH_FG  
-hi! link Keyword      HH_Red
-
-hi! link Type       HH_Cyan
-hi! link Delimiter  HH_FG
-
-hi! link Tag            HH_Cyan
-hi! link Define         HH_Purple
-hi! link Special        HH_Purple
-hi! link SpecialKey     HH_Purple
-hi! link SpecialComment HH_Cyan
-hi! link StorageClass   HH_Purple
-hi! link Structure      HH_Purple
-hi! link Macro          HH_Purple
-hi! link PreCondit      HH_Purple
-hi! link Include        HH_Red
-hi! link Typedef        HH_Purple
-
-hi! link DiffAdd        HH_Green
-hi! link DiffDelete     HH_Red
-hi! link DiffText       HH_FG
-hi! link DiffChange     HH_Yellow
-hi! link WarningMsg     HH_Yellow
-hi! link PreProc        HH_Purple
-hi! link PreCondit      HH_Purple
-hi! link Title          HH_FG
-
 " GO
 "
-hi! link goType                   HH_Purple
-hi! link goBuiltins               HH_Red
-hi! link goLabel                  HH_Red
-hi! link goPredefinedIdentifiers  HH_Yellow
-hi! link goImportString           HH_Red
+hi! link goType                   HardHacker_Purple
+hi! link goBuiltins               HardHacker_Red
+hi! link goLabel                  HardHacker_Red
+hi! link goPredefinedIdentifiers  HardHacker_Yellow
+hi! link goImportString           HardHacker_Red
 
 " HTML
 "
-hi! link htmlTag          HH_Red
-hi! link htmlEndTag       HH_Red
-hi! link htmlTagName      HH_Red
-hi! link htmlArg          HH_Blue
-hi! link htmlSpecialChar  HH_Green
+hi! link htmlTag          HardHacker_Red
+hi! link htmlEndTag       HardHacker_Red
+hi! link htmlTagName      HardHacker_Red
+hi! link htmlArg          HardHacker_Blue
+hi! link htmlSpecialChar  HardHacker_Green
 
 " JAVASCRIPT
 "
-hi! link javaScriptBraces   HH_FG
+hi! link javaScriptBraces   HardHacker_FG
 hi! link javaScriptNumber   Constant
 hi! link javaScriptNull     Constant
 hi! link javaScriptFunction Keyword
 
 """ 'pangloss/vim-javascript'
 hi! link jsArrowFunction           Operator
-hi! link jsBuiltins                HH_Cyan
-hi! link jsClassDefinition         HH_Cyan
+hi! link jsBuiltins                HardHacker_Cyan
+hi! link jsClassDefinition         HardHacker_Cyan
 hi! link jsClassMethodType         Keyword
-hi! link jsDestructuringAssignment HH_Yellow
-hi! link jsDocParam                HH_Yellow
+hi! link jsDestructuringAssignment HardHacker_Yellow
+hi! link jsDocParam                HardHacker_Yellow
 hi! link jsDocTags                 Keyword
 hi! link jsDocType                 Type
-hi! link jsDocTypeBrackets         HH_Cyan
+hi! link jsDocTypeBrackets         HardHacker_Cyan
 hi! link jsFuncArgOperator         Operator
-hi! link jsFuncArgs                HH_Yellow
+hi! link jsFuncArgs                HardHacker_Yellow
 hi! link jsFunction                Keyword
 hi! link jsNull                    Constant
-hi! link jsObjectColon             HH_Red
-hi! link jsSuper                   HH_Purple
+hi! link jsObjectColon             HardHacker_Red
+hi! link jsSuper                   HardHacker_Purple
 hi! link jsTemplateBraces          Special
-hi! link jsThis                    HH_Purple
+hi! link jsThis                    HardHacker_Purple
 hi! link jsUndefined               Constant
 
 """ 'maxmellon/vim-jsx-pretty'
@@ -176,33 +196,33 @@ hi! link jsxTag             Keyword
 hi! link jsxTagName         Keyword
 hi! link jsxComponentName   Type
 hi! link jsxCloseTag        Type
-hi! link jsxAttrib          HH_Green
+hi! link jsxAttrib          HardHacker_Green
 hi! link jsxCloseString     Identifier
 hi! link jsxOpenPunct       Identifier
 
 " YAML
 "
-hi! link yamlAnchor          HH_Purple
-hi! link yamlPlainScalar     HH_Yellow
-hi! link yamlAlias           HH_Green
-hi! link yamlFlowCollection  HH_Purple
-hi! link yamlNodeTag         HH_Purple
-hi! link yamlBlockMappingKey HH_Cyan
+hi! link yamlAnchor          HardHacker_Purple
+hi! link yamlPlainScalar     HardHacker_Yellow
+hi! link yamlAlias           HardHacker_Green
+hi! link yamlFlowCollection  HardHacker_Purple
+hi! link yamlNodeTag         HardHacker_Purple
+hi! link yamlBlockMappingKey HardHacker_Cyan
 hi! link yamlFlowIndicator   Delimiter
 
 " CSS
 "
-hi! link cssNoise             HH_Blue
-hi! link cssPseudoClassId     HH_Blue
+hi! link cssNoise             HardHacker_Blue
+hi! link cssPseudoClassId     HardHacker_Blue
 hi! link cssAttrComma         Delimiter
-hi! link cssAttrRegion        HH_Cyan
+hi! link cssAttrRegion        HardHacker_Cyan
 hi! link cssFunctionComma     Delimiter
-hi! link cssProp              HH_Purple
-hi! link cssUnitDecorators    HH_Blue
+hi! link cssProp              HardHacker_Purple
+hi! link cssUnitDecorators    HardHacker_Blue
 hi! link cssBraces            Delimiter
-hi! link cssAttributeSelector HH_Green   
-hi! link cssPseudoClass       HH_Blue
-hi! link cssVendor            HH_Green
+hi! link cssAttributeSelector HardHacker_Green   
+hi! link cssPseudoClass       HardHacker_Blue
+hi! link cssVendor            HardHacker_Green
 
 " Rust
 "
@@ -223,9 +243,10 @@ hi! link vimHiBang             Keyword
 
 " JSON
 "
-hi! link jsonKeywordMatch HH_Purple
-hi! link jsonKeyword      HH_Purple
+hi! link jsonKeywordMatch HardHacker_Purple
+hi! link jsonKeyword      HardHacker_Purple
 
 " Shell
 "
-hi! link shEscape     HH_Red
+hi! link shEscape HardHacker_Red
+
