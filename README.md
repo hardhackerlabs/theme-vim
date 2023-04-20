@@ -1,4 +1,10 @@
-# HardHacker Theme for Vim
+<p align="center">
+  <img width="180" src="https://github.com/hardhackerlabs/themes/raw/master/media/logo/logo.png" alt="HardHacker">
+</p>
+
+<h1 align="center">
+  HardHacker Theme for VIM
+</h1>
 
 > Supported vim's gui and term environments
 
