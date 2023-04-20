@@ -1,2 +1,2 @@
-# vim-
+# vim
 HardHacker theme for Vim
