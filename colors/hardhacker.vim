@@ -27,6 +27,7 @@ let s:yellow        = "#ebde76"
 let s:blue          = "#b1baf4"
 let s:purple        = "#e192ef"
 let s:cyan          = "#b3f4f3"
+let s:black         = "#000000"
 
 let s:bg2           = "235"
 let s:fg2           = "255"
@@ -38,6 +39,7 @@ let s:yellow2       = "227"
 let s:blue2         = "153"
 let s:purple2       = "219"
 let s:cyan2         = "123"
+let s:black2        = "16"
 
 let s:none          = "NONE"
 
@@ -62,20 +64,20 @@ call s:hi_group('CursorLine', s:red2, s:selection2, s:red, s:selection)
 call s:hi_group('CursorColumn', s:none, s:bg2,  s:none, s:bg)
 call s:hi_group('ColorColumn', s:none, s:bg2,  s:none, s:bg)
 call s:hi_group('LineNr', '102', s:bg2, '#84898c', s:bg)
-call s:hi_group('Visual',  s:none, s:purple2, s:none, s:purple)
+call s:hi_group('Visual',  s:none, s:selection2, s:none, s:selection)
 call s:hi_group('Directory', s:blue2, s:none, s:blue, s:none)
 call s:hi_group('IncSearch', s:bg2, s:yellow2, s:bg, s:yellow)
 call s:hi_group('VertSplit', s:selection2, s:bg2, s:selection, s:bg)
 call s:hi_group('StatusLine', s:fg2, s:selection2, s:fg, s:selection)
 call s:hi_group('StatusLineNC', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group('Pmenu', s:fg2, s:selection2, s:fg, s:selection)
-call s:hi_group('PmenuSel',s:fg2, s:purple2, s:fg, s:purple)
+call s:hi_group('PmenuSel',s:black2, s:purple2, s:black, s:purple)
 call s:hi_group('Folded', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group('Normal', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group('EndOfBuffer', s:selection2, s:bg2, s:selection, s:bg) 
 
 execute 'hi Search ctermfg='.s:bg2.' ctermbg='.s:yellow2.' cterm=underline guifg='.s:bg.' guibg='.s:yellow.' gui=underline'
-execute 'hi MatchParen ctermfg=180 ctermbg=NONE cterm=underline guifg=#dda790 guibg=NONE gui=underline'
+execute 'hi MatchParen ctermfg='.s:yellow2.' ctermbg=NONE cterm=underline guifg='.s:yellow.' guibg=NONE gui=underline'
 
 " Set text highlight
 "
