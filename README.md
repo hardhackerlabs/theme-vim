@@ -6,7 +6,7 @@
   HardHacker Theme for VIM
 </h1>
 
-> Supported vim's gui and term environments
+Supported vim's gui and term environments
 
 ![](./media/preview.jpeg)
 
@@ -50,5 +50,7 @@ Add the following configuration to the `~/.vimrc` or `~/.config/nvim/init.vim` f
 syntax      enable
 syntax      on
 set         t_Co=256
+" This theme is dark by default, if you set the variable 'g:hardhacker_darcker' to 1, you will get a darker theme
+" let g:hardhacker_darker = 1
 colorscheme hardhacker
 ```
