@@ -19,26 +19,21 @@ git clone https://github.com/hardhackerlabs/theme-vim.git
 cp theme-vim/colors/hardhacker.vim  ~/.vim/colors/
 ```
 
-Add the following configuration to the `~/.vimrc` file, then restart Vim
-
-```
-syntax      enable
-syntax      on
-set         t_Co=256
-colorscheme hardhacker
-```
-
 ### Using Vundle
-
-Add the following configuration to the ~/.vimrc file, then execute `PluginInstall` command to install hardhacker theme
 
 ```
 Plugin 'hardhackerlabs/theme-vim', { 'name': 'hardhacker' }
 ```
 
-Note that before installing the theme, you need to have installed and configured **Vundle** plugin management
+### Using Plug
 
-Add the following configuration to the `~/.vimrc` file, then restart Vim
+```
+Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
+```
+
+## Setup
+
+Add the following configuration to the `~/.vimrc` or `~/.config/nvim/init.vim` file, then restart Vim or Neovim
 
 ```
 syntax      enable
