@@ -12,7 +12,7 @@
 
 ## Install
 
-### Git clone
+### Using Git
 
 ```bash
 git clone https://github.com/hardhackerlabs/theme-vim.git
@@ -28,7 +28,7 @@ set         t_Co=256
 colorscheme hardhacker
 ```
 
-### Vundle
+### Using Vundle
 
 Add the following configuration to the ~/.vimrc file, then execute `PluginInstall` command to install hardhacker theme
 

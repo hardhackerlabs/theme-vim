@@ -15,7 +15,7 @@ if exists('g:loaded_fzf') && ! exists('g:fzf_colors')
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'],
       \}
-  endif
+endif
 
 " gitgutter gitsigns
 if exists('g:loaded_gitgutter')
