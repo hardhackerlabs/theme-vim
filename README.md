@@ -32,7 +32,7 @@ Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
 ```
 
 ### Using Lazy.nvim (for neovim user)
-If you're using neovim, you can use [lazy.nvim](https://github.com/folke/lazy.nvim) to install too
+If you're using neovim, you can use [lazy.nvim](https://github.com/folke/lazy.nvim) too
 ```lua
 -- init.lua:
   {
