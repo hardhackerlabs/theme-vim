@@ -14,10 +14,13 @@ if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolo
   finish
 endif
 
+let g:hardhacker_darker=0
 
 " Palette
 "
-let s:bg            = "#282433"
+let s:bg_darker     = "#211e2a"
+let s:bg_dark       = "#282433"
+let s:bg            = s:bg_dark
 let s:fg            = "#eee9fc"
 let s:selection     = "#3f3951"
 let s:comment       = "#777383"
@@ -28,9 +31,10 @@ let s:blue          = "#b1baf4"
 let s:purple        = "#e192ef"
 let s:cyan          = "#b3f4f3"
 let s:black         = "#000000"
-let s:bg_darker     = "#211e2a"
 
-let s:bg2           = "235"
+let s:bg2_darker    = "234"
+let s:bg2_dark      = "235"
+let s:bg2           = s:bg2_dark
 let s:fg2           = "255"
 let s:selection2    = "238"
 let s:comment2      = "243"
@@ -43,6 +47,11 @@ let s:cyan2         = "123"
 let s:black2        = "16"
 
 let s:none          = "NONE"
+
+if g:hardhacker_darker == 1
+    s:bg = s:bg_darker
+    s:bg2 = s:bg2_darker
+endif
 
 " Set environment style
 "
@@ -108,6 +117,7 @@ call s:hi_fg_group('HardHacker_Cyan',s:cyan2, s:cyan)
 call s:hi_fg_group('HardHacker_Green', s:green2, s:green)
 call s:hi_fg_group('HardHacker_FG', s:fg2, s:fg)
 call s:hi_bg_group('HardHacker_BG_Darker', s:black2, s:black)
+call s:hi_bg_group('HardHacker_Selection', s:selection2, s:selection)
 
 call s:hi_fg_group('Comment',s:comment2, s:comment)
 hi! link String         HardHacker_Green
@@ -176,6 +186,35 @@ function s:is_valid(...)
     endif
     return 0
 endfunction
+
+if has('nvim')
+    hi! link DiagnosticInfo             HardHacker_Cyan
+    hi! link DiagnosticHint             HardHacker_Cyan
+    hi! link DiagnosticError            HardHacker_Red
+    hi! link DiagnosticWarn             HardHacker_Yellow
+    hi! link DiagnosticUnderlineError   HardHacker_Red
+    hi! link DiagnosticUnderlineHint    HardHacker_FG
+    hi! link DiagnosticUnderlineInfo    HardHacker_FG
+    hi! link DiagnosticUnderlineWarn    HardHacker_Yellow
+    
+    hi! link WinSeparator               Comment
+
+    hi! link SpecialKey                 HardHacker_Red
+    hi! link LspReferenceText           HardHacker_Selection
+    hi! link LspReferenceRead           HardHacker_Selection
+    hi! link LspReferenceWrite          HardHacker_Selection
+
+    hi! link LspDiagnosticsDefaultInformation   DiagnosticInfo
+    hi! link LspDiagnosticsDefaultHint          DiagnosticHint
+    hi! link LspDiagnosticsDefaultError         DiagnosticError
+    hi! link LspDiagnosticsDefaultWarning       DiagnosticWarn
+    hi! link LspDiagnosticsUnderlineError       DiagnosticUnderlineError
+    hi! link LspDiagnosticsUnderlineHint        DiagnosticUnderlineHint
+    hi! link LspDiagnosticsUnderlineInformation DiagnosticUnderlineInfo
+    hi! link LspDiagnosticsUnderlineWarning     DiagnosticUnderlineWarn
+else
+    hi! link SpecialKey HardHacker_Purple
+endif
 
 " GO
 "
