@@ -31,6 +31,17 @@ Plugin 'hardhackerlabs/theme-vim', { 'name': 'hardhacker' }
 Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
 ```
 
+### Using Lazy.nvim (for neovim user)
+If you're using neovim, you can use [lazy.nvim](https://github.com/folke/lazy.nvim) to install too
+```lua
+-- init.lua:
+  {
+    'hardhackerlabs/theme-vim',
+    config = function()
+      vim.cmd.colorscheme 'hardhacker'
+    end,
+  },
+```
 ## Setup
 
 Add the following configuration to the `~/.vimrc` or `~/.config/nvim/init.vim` file, then restart Vim or Neovim
