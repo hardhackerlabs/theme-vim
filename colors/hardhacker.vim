@@ -120,6 +120,10 @@ call s:hi_fg_group('HardHacker_Green', s:green2, s:green)
 call s:hi_fg_group('HardHacker_FG', s:fg2, s:fg)
 call s:hi_bg_group('HardHacker_BG_Darker', s:black2, s:black)
 call s:hi_bg_group('HardHacker_Selection', s:selection2, s:selection)
+call s:hi_group('HardHacker_Black_Yellow', s:black2, s:yellow2, s:black, s:yellow)
+call s:hi_group('HardHacker_Green_Selection', s:green2, s:selection2, s:green, s:selection)
+call s:hi_group('HardHacker_Red_Selection', s:red2, s:selection2, s:red, s:selection)
+call s:hi_group('HardHacker_Yellow_Selection', s:yellow2, s:selection2, s:yellow, s:selection)
 
 call s:hi_fg_group('Comment',s:comment2, s:comment)
 hi! link String         HardHacker_Green
@@ -155,12 +159,12 @@ hi! link PreCondit      HardHacker_Purple
 hi! link Include        HardHacker_Red
 hi! link Typedef        HardHacker_Purple
 
-hi! link DiffAdd        HardHacker_Green
+hi! link DiffAdd        HardHacker_Green_Selection
 hi! link DiffAdded      DiffAdd
-hi! link DiffDelete     HardHacker_Red
+hi! link DiffDelete     HardHacker_Red_Selection
 hi! link DiffRemoved    DiffDelete
-hi! link DiffText       HardHacker_FG
-hi! link DiffChange     HardHacker_Yellow
+hi! link DiffText       HardHacker_Black_Yellow
+hi! link DiffChange     HardHacker_Yellow_Selection
 
 hi! link TabLine        HardHacker_FG
 hi! link TabLineFill    HardHacker_BG_Darker
@@ -174,8 +178,8 @@ hi! link PreCondit      HardHacker_Purple
 hi! link Title          HardHacker_FG
 hi! link Question       HardHacker_FG " todo
 hi! link SignColumn     Comment
-call s:hi_fg_group('ErrorMsg', s:none, s:none)
-call s:hi_group('Error', s:fg2, s:red2, s:fg, s:red)
+hi! link Error          HardHacker_Black_Yellow
+hi! link ErrorMsg       Error
 execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline'
 execute 'hi Todo ctermfg='.s:yellow2.' ctermbg=NONE cterm=inverse,bold guifg='.s:yellow.' guibg=NONE gui=inverse,bold,italic'
 
