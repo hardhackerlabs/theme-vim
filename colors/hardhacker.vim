@@ -111,74 +111,74 @@ function s:hi_bg_group(group, ctermbg, guibg)
     call s:hi_group(a:group, s:none, a:ctermbg, s:none, a:guibg)
 endfunction
 
-call s:hi_fg_group('HardHacker_Red', s:red2, s:red)
-call s:hi_fg_group('HardHacker_Purple', s:purple2, s:purple)
-call s:hi_fg_group('HardHacker_Blue', s:blue2,s:blue)
-call s:hi_fg_group('HardHacker_Yellow', s:yellow2, s:yellow)
-call s:hi_fg_group('HardHacker_Cyan',s:cyan2, s:cyan)
-call s:hi_fg_group('HardHacker_Green', s:green2, s:green)
-call s:hi_fg_group('HardHacker_FG', s:fg2, s:fg)
-call s:hi_bg_group('HardHacker_BG_Darker', s:black2, s:black)
-call s:hi_bg_group('HardHacker_Selection', s:selection2, s:selection)
-call s:hi_group('HardHacker_Black_Yellow', s:black2, s:yellow2, s:black, s:yellow)
-call s:hi_group('HardHacker_Green_Selection', s:green2, s:selection2, s:green, s:selection)
-call s:hi_group('HardHacker_Red_Selection', s:red2, s:selection2, s:red, s:selection)
-call s:hi_group('HardHacker_Yellow_Selection', s:yellow2, s:selection2, s:yellow, s:selection)
+call s:hi_fg_group('HardHackerRed', s:red2, s:red)
+call s:hi_fg_group('HardHackerPurple', s:purple2, s:purple)
+call s:hi_fg_group('HardHackerBlue', s:blue2,s:blue)
+call s:hi_fg_group('HardHackerYellow', s:yellow2, s:yellow)
+call s:hi_fg_group('HardHackerCyan',s:cyan2, s:cyan)
+call s:hi_fg_group('HardHackerGreen', s:green2, s:green)
+call s:hi_fg_group('HardHackerFg', s:fg2, s:fg)
+call s:hi_bg_group('HardHackerBgDarker', s:black2, s:black)
+call s:hi_bg_group('HardHackerSelection', s:selection2, s:selection)
+call s:hi_group('HardHackerBlackYellow', s:black2, s:yellow2, s:black, s:yellow)
+call s:hi_group('HardHackerGreenSelection', s:green2, s:selection2, s:green, s:selection)
+call s:hi_group('HardHackerRedSelection', s:red2, s:selection2, s:red, s:selection)
+call s:hi_group('HardHackerYellowSelection', s:yellow2, s:selection2, s:yellow, s:selection)
 
 call s:hi_fg_group('Comment',s:comment2, s:comment)
-hi! link String         HardHacker_Green
-hi! link Constant       HardHacker_Purple
-hi! link Character      HardHacker_Yellow
-hi! link Number         HardHacker_Yellow
-hi! link Boolean        HardHacker_Yellow
-hi! link Float          HardHacker_Yellow
+hi! link String         HardHackerGreen
+hi! link Constant       HardHackerPurple
+hi! link Character      HardHackerYellow
+hi! link Number         HardHackerYellow
+hi! link Boolean        HardHackerYellow
+hi! link Float          HardHackerYellow
 
-hi! link Function       HardHacker_Blue
-hi! link Identifier     HardHacker_Blue
+hi! link Function       HardHackerBlue
+hi! link Identifier     HardHackerBlue
 
-hi! link Exception      HardHacker_Red
-hi! link Repeat         HardHacker_Red
-hi! link Statement      HardHacker_Red
-hi! link Conditional    HardHacker_Red
-hi! link Label          HardHacker_Red
-hi! link Operator       HardHacker_FG  
-hi! link Keyword        HardHacker_Red
+hi! link Exception      HardHackerRed
+hi! link Repeat         HardHackerRed
+hi! link Statement      HardHackerRed
+hi! link Conditional    HardHackerRed
+hi! link Label          HardHackerRed
+hi! link Operator       HardHackerFg  
+hi! link Keyword        HardHackerRed
 
-hi! link Type           HardHacker_Cyan
-hi! link Delimiter      HardHacker_FG
+hi! link Type           HardHackerCyan
+hi! link Delimiter      HardHackerFg
 
-hi! link Tag            HardHacker_Cyan
-hi! link Define         HardHacker_Purple
-hi! link Special        HardHacker_Purple
-hi! link SpecialKey     HardHacker_Purple
-hi! link SpecialComment HardHacker_Cyan
-hi! link StorageClass   HardHacker_Purple
-hi! link Structure      HardHacker_Purple
-hi! link Macro          HardHacker_Purple
-hi! link PreCondit      HardHacker_Purple
-hi! link Include        HardHacker_Red
-hi! link Typedef        HardHacker_Purple
+hi! link Tag            HardHackerCyan
+hi! link Define         HardHackerPurple
+hi! link Special        HardHackerPurple
+hi! link SpecialKey     HardHackerPurple
+hi! link SpecialComment HardHackerCyan
+hi! link StorageClass   HardHackerPurple
+hi! link Structure      HardHackerPurple
+hi! link Macro          HardHackerPurple
+hi! link PreCondit      HardHackerPurple
+hi! link Include        HardHackerRed
+hi! link Typedef        HardHackerPurple
 
-hi! link DiffAdd        HardHacker_Green_Selection
+hi! link DiffAdd        HardHackerGreenSelection
 hi! link DiffAdded      DiffAdd
-hi! link DiffDelete     HardHacker_Red_Selection
+hi! link DiffDelete     HardHackerRedSlection
 hi! link DiffRemoved    DiffDelete
-hi! link DiffText       HardHacker_Black_Yellow
-hi! link DiffChange     HardHacker_Yellow_Selection
+hi! link DiffText       HardHackerBlackYellow
+hi! link DiffChange     HardHackerYellowSelection
 
-hi! link TabLine        HardHacker_FG
-hi! link TabLineFill    HardHacker_BG_Darker
+hi! link TabLine        HardHackerFg
+hi! link TabLineFill    HardHackerBgDarker
 hi! link TabLineSel     Normal
 
-hi! link MoreMsg        HardHacker_FG " todo
+hi! link MoreMsg        HardHackerFg " todo
 hi! link NonText        EndOfBuffer   " todo
-hi! link WarningMsg     HardHacker_Yellow
-hi! link PreProc        HardHacker_Purple
-hi! link PreCondit      HardHacker_Purple
-hi! link Title          HardHacker_FG
-hi! link Question       HardHacker_FG " todo
+hi! link WarningMsg     HardHackerYellow
+hi! link PreProc        HardHackerPurple
+hi! link PreCondit      HardHackerPurple
+hi! link Title          HardHackerFg
+hi! link Question       HardHackerFg " todo
 hi! link SignColumn     Comment
-hi! link Error          HardHacker_Black_Yellow
+hi! link Error          HardHackerBlackYellow
 hi! link ErrorMsg       Error
 execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline'
 execute 'hi Todo ctermfg='.s:yellow2.' ctermbg=NONE cterm=inverse,bold guifg='.s:yellow.' guibg=NONE gui=inverse,bold,italic'
@@ -194,21 +194,21 @@ function s:is_valid(...)
 endfunction
 
 if has('nvim')
-    hi! link DiagnosticInfo             HardHacker_Cyan
-    hi! link DiagnosticHint             HardHacker_Cyan
-    hi! link DiagnosticError            HardHacker_Red
-    hi! link DiagnosticWarn             HardHacker_Yellow
-    hi! link DiagnosticUnderlineError   HardHacker_Red
-    hi! link DiagnosticUnderlineHint    HardHacker_FG
-    hi! link DiagnosticUnderlineInfo    HardHacker_FG
-    hi! link DiagnosticUnderlineWarn    HardHacker_Yellow
+    hi! link DiagnosticInfo             HardHackerCyan
+    hi! link DiagnosticHint             HardHackerCyan
+    hi! link DiagnosticError            HardHackerRed
+    hi! link DiagnosticWarn             HardHackerYellow
+    hi! link DiagnosticUnderlineError   HardHackerRed
+    hi! link DiagnosticUnderlineHint    HardHackerFg
+    hi! link DiagnosticUnderlineInfo    HardHackerFg
+    hi! link DiagnosticUnderlineWarn    HardHackerYellow
     
     hi! link WinSeparator               Comment
 
-    hi! link SpecialKey                 HardHacker_Red
-    hi! link LspReferenceText           HardHacker_Selection
-    hi! link LspReferenceRead           HardHacker_Selection
-    hi! link LspReferenceWrite          HardHacker_Selection
+    hi! link SpecialKey                 HardHackerRed
+    hi! link LspReferenceText           HardHackerSelection
+    hi! link LspReferenceRead           HardHackerSelection
+    hi! link LspReferenceWrite          HardHackerSelection
 
     hi! link LspDiagnosticsDefaultInformation   DiagnosticInfo
     hi! link LspDiagnosticsDefaultHint          DiagnosticHint
@@ -219,5 +219,5 @@ if has('nvim')
     hi! link LspDiagnosticsUnderlineInformation DiagnosticUnderlineInfo
     hi! link LspDiagnosticsUnderlineWarning     DiagnosticUnderlineWarn
 else
-    hi! link SpecialKey HardHacker_Purple
+    hi! link SpecialKey HardHackerPurple
 endif
