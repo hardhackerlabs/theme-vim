@@ -73,7 +73,7 @@ endfunction
 
 call s:hi_group('Cursor', s:fg2, s:red2, s:fg, s:red)
 call s:hi_group('CursorLine', s:none, s:selection2, s:none, s:selection)
-call s:hi_group('CursorLineNr', s:purple2, s:bg2, s:purple, s:bg2)
+call s:hi_group('CursorLineNr', s:purple2, s:bg2, s:purple, s:bg)
 call s:hi_group('CursorColumn', s:none, s:bg2,  s:none, s:bg)
 call s:hi_group('ColorColumn', s:none, s:bg2,  s:none, s:bg)
 
