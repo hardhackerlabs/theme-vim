@@ -6,7 +6,7 @@
   HardHacker Theme for VIM
 </h1>
 
-Supported vim's gui and term environments
+Supported Vim, MacVim and NeoVim 
 
 ![](./media/preview.jpeg)
 
@@ -21,13 +21,13 @@ cp theme-vim/colors/hardhacker.vim  ~/.vim/colors/
 
 ### Using Vundle
 
-```
+```vim
 Plugin 'hardhackerlabs/theme-vim', { 'name': 'hardhacker' }
 ```
 
 ### Using Plug
 
-```
+```vim
 Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
 ```
 
@@ -44,13 +44,14 @@ If you're using neovim, you can use [lazy.nvim](https://github.com/folke/lazy.nv
 ```
 ## Setup
 
-Add the following configuration to the `~/.vimrc` or `~/.config/nvim/init.vim` file, then restart Vim or Neovim
+Add the following configuration to the `~/.vimrc` or `~/.config/nvim/init.vim` file, then restart Vim or Neovim.
 
-```
+```vim
 syntax      enable
 syntax      on
 set         t_Co=256
-" This theme is dark by default, if you set the variable 'g:hardhacker_darcker' to 1, you will get a darker theme
 " let g:hardhacker_darker = 1
 colorscheme hardhacker
 ```
+
+This theme is dark by default, if you set the variable `g:hardhacker_darcker` to 1, you will get a darker theme
