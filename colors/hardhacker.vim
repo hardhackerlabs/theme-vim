@@ -119,7 +119,7 @@ call s:hi_fg_group('HardHackerCyan',s:cyan2, s:cyan)
 call s:hi_fg_group('HardHackerGreen', s:green2, s:green)
 call s:hi_fg_group('HardHackerFg', s:fg2, s:fg)
 
-call s:hi_bg_group('HardHackerBgDarker', s:black2, s:black)
+call s:hi_bg_group('HardHackerBg', s:bg2, s:bg)
 call s:hi_bg_group('HardHackerSelection', s:selection2, s:selection)
 
 call s:hi_group('HardHackerBlackYellow', s:black2, s:yellow2, s:black, s:yellow)
@@ -169,9 +169,9 @@ hi! link DiffRemoved    DiffDelete
 hi! link DiffText       HardHackerBlackYellow
 hi! link DiffChange     HardHackerYellowSelection
 
-hi! link TabLine        HardHackerFg
-hi! link TabLineFill    HardHackerBgDarker
-hi! link TabLineSel     Normal
+hi! link TabLine        Normal
+hi! link TabLineFill    HardHackerBg
+hi! link TabLineSel     HardHackerRed
 
 hi! link MoreMsg        HardHackerRed
 hi! link NonText        EndOfBuffer
