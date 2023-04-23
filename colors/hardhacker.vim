@@ -90,7 +90,7 @@ call s:hi_group('PmenuThumb',s:black2, s:purple2, s:black, s:purple)
 
 call s:hi_group('Folded', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group('Normal', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group('EndOfBuffer', s:selection2, s:bg2, s:selection, s:bg) 
+call s:hi_group('EndOfBuffer', s:comment2, s:bg2, s:comment, s:bg) 
 call s:hi_group('LineNr', s:comment2, s:bg2, s:comment, s:bg)
 call s:hi_group('Visual',  s:none, s:selection2, s:none, s:selection)
 call s:hi_group('VisualNOS',  s:none, s:selection2, s:none, s:selection)
@@ -118,8 +118,10 @@ call s:hi_fg_group('HardHackerYellow', s:yellow2, s:yellow)
 call s:hi_fg_group('HardHackerCyan',s:cyan2, s:cyan)
 call s:hi_fg_group('HardHackerGreen', s:green2, s:green)
 call s:hi_fg_group('HardHackerFg', s:fg2, s:fg)
+
 call s:hi_bg_group('HardHackerBgDarker', s:black2, s:black)
 call s:hi_bg_group('HardHackerSelection', s:selection2, s:selection)
+
 call s:hi_group('HardHackerBlackYellow', s:black2, s:yellow2, s:black, s:yellow)
 call s:hi_group('HardHackerGreenSelection', s:green2, s:selection2, s:green, s:selection)
 call s:hi_group('HardHackerRedSelection', s:red2, s:selection2, s:red, s:selection)
@@ -158,10 +160,11 @@ hi! link Macro          HardHackerPurple
 hi! link PreCondit      HardHackerPurple
 hi! link Include        HardHackerRed
 hi! link Typedef        HardHackerPurple
+hi! link PreProc        HardHackerPurple
 
 hi! link DiffAdd        HardHackerGreenSelection
 hi! link DiffAdded      DiffAdd
-hi! link DiffDelete     HardHackerRedSlection
+hi! link DiffDelete     HardHackerRedSelection
 hi! link DiffRemoved    DiffDelete
 hi! link DiffText       HardHackerBlackYellow
 hi! link DiffChange     HardHackerYellowSelection
@@ -170,19 +173,16 @@ hi! link TabLine        HardHackerFg
 hi! link TabLineFill    HardHackerBgDarker
 hi! link TabLineSel     Normal
 
-hi! link MoreMsg        HardHackerFg " todo
-hi! link NonText        EndOfBuffer   " todo
+hi! link MoreMsg        HardHackerRed
+hi! link NonText        EndOfBuffer
 hi! link WarningMsg     HardHackerYellow
-hi! link PreProc        HardHackerPurple
-hi! link PreCondit      HardHackerPurple
-hi! link Title          HardHackerFg
-hi! link Question       HardHackerFg " todo
+hi! link Title          HardHackerRed
+hi! link Question       HardHackerRed
 hi! link SignColumn     Comment
 hi! link Error          HardHackerBlackYellow
 hi! link ErrorMsg       Error
 execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline'
 execute 'hi Todo ctermfg='.s:yellow2.' ctermbg=NONE cterm=inverse,bold guifg='.s:yellow.' guibg=NONE gui=inverse,bold,italic'
-
 
 function s:is_valid(...)
     if ! exists('s:colors_name') || s:colors_name !=# 'hardhacker'
@@ -221,3 +221,108 @@ if has('nvim')
 else
     hi! link SpecialKey HardHackerPurple
 endif
+
+
+" SYNTAX
+"
+" GO
+"
+hi! link goType                   HardHackerPurple
+hi! link goBuiltins               HardHackerRed
+hi! link goLabel                  HardHackerRed
+hi! link goPredefinedIdentifiers  HardHackerYellow
+hi! link goImportString           HardHackerRed
+
+" HTML
+"
+hi! link htmlTag          HardHackerRed
+hi! link htmlEndTag       HardHackerRed
+hi! link htmlTagName      HardHackerRed
+hi! link htmlArg          HardHackerBlue
+hi! link htmlSpecialChar  HardHackerGreen
+
+" JAVASCRIPT
+"
+hi! link javaScriptBraces   HardHackerFg
+hi! link javaScriptNumber   Constant
+hi! link javaScriptNull     Constant
+hi! link javaScriptFunction Keyword
+
+""" 'pangloss/vim-javascript'
+hi! link jsArrowFunction           Operator
+hi! link jsBuiltins                HardHackerCyan
+hi! link jsClassDefinition         HardHackerCyan
+hi! link jsClassMethodType         Keyword
+hi! link jsDestructuringAssignment HardHackerYellow
+hi! link jsDocParam                HardHackerYellow
+hi! link jsDocTags                 Keyword
+hi! link jsDocType                 Type
+hi! link jsDocTypeBrackets         HardHackerCyan
+hi! link jsFuncArgOperator         Operator
+hi! link jsFuncArgs                HardHackerYellow
+hi! link jsFunction                Keyword
+hi! link jsNull                    Constant
+hi! link jsObjectColon             HardHackerRed
+hi! link jsSuper                   HardHackerPurple
+hi! link jsTemplateBraces          Special
+hi! link jsThis                    HardHackerPurple
+hi! link jsUndefined               Constant
+
+""" 'maxmellon/vim-jsx-pretty'
+hi! link jsxTag             Keyword
+hi! link jsxTagName         Keyword
+hi! link jsxComponentName   Type
+hi! link jsxCloseTag        Type
+hi! link jsxAttrib          HardHackerGreen
+hi! link jsxCloseString     Identifier
+hi! link jsxOpenPunct       Identifier
+
+" YAML
+"
+hi! link yamlAnchor          HardHackerPurple
+hi! link yamlPlainScalar     HardHackerYellow
+hi! link yamlAlias           HardHackerGreen
+hi! link yamlFlowCollection  HardHackerPurple
+hi! link yamlNodeTag         HardHackerPurple
+hi! link yamlBlockMappingKey HardHackerCyan
+hi! link yamlFlowIndicator   Delimiter
+
+" CSS
+"
+hi! link cssNoise             HardHackerBlue
+hi! link cssPseudoClassId     HardHackerBlue
+hi! link cssAttrComma         Delimiter
+hi! link cssAttrRegion        HardHackerCyan
+hi! link cssFunctionComma     Delimiter
+hi! link cssProp              HardHackerPurple
+hi! link cssUnitDecorators    HardHackerBlue
+hi! link cssBraces            Delimiter
+hi! link cssAttributeSelector HardHackerGreen   
+hi! link cssPseudoClass       HardHackerBlue
+hi! link cssVendor            HardHackerGreen
+
+" Rust
+"
+hi! link rustCommentLineDoc Comment
+
+" Vim
+"
+hi! link vimEnvVar             Constant
+hi! link vimAutoEventList      Type
+hi! link vimUserAttrbCmpltFunc Function
+hi! link vimFunction           Function
+hi! link vimOption             Type
+hi! link vimSetMod             Keyword
+hi! link vimAutoCmdSfxList     Type
+hi! link vimSetSep             Delimiter
+hi! link vimUserFunc           Function
+hi! link vimHiBang             Keyword
+
+" JSON
+"
+hi! link jsonKeywordMatch HardHackerPurple
+hi! link jsonKeyword      HardHackerPurple
+
+" Shell
+"
+hi! link shEscape HardHackerRed
