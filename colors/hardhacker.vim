@@ -133,16 +133,16 @@ hi! link Number         HardHackerYellow
 hi! link Boolean        HardHackerYellow
 hi! link Float          HardHackerYellow
 
-hi! link Function       HardHackerBlue
-hi! link Identifier     HardHackerBlue
+hi! link Function       HardHackerRed
+hi! link Identifier     HardHackerPurple
 
-hi! link Exception      HardHackerRed
-hi! link Repeat         HardHackerRed
-hi! link Statement      HardHackerRed
-hi! link Conditional    HardHackerRed
-hi! link Label          HardHackerRed
+hi! link Exception      HardHackerBlue
+hi! link Repeat         HardHackerBlue
+hi! link Statement      HardHackerBlue
+hi! link Conditional    HardHackerBlue
+hi! link Label          HardHackerBlue
+hi! link Keyword        HardHackerBlue
 hi! link Operator       HardHackerFg  
-hi! link Keyword        HardHackerRed
 
 hi! link Type           HardHackerCyan
 hi! link Delimiter      HardHackerFg
