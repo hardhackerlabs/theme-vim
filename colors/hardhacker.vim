@@ -225,14 +225,6 @@ endif
 
 " SYNTAX
 "
-" GO
-"
-hi! link goType                   HardHackerPurple
-hi! link goBuiltins               HardHackerRed
-hi! link goLabel                  HardHackerRed
-hi! link goPredefinedIdentifiers  HardHackerYellow
-hi! link goImportString           HardHackerRed
-
 " HTML
 "
 hi! link htmlTag          HardHackerRed
