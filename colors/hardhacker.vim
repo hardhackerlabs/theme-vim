@@ -227,10 +227,10 @@ endif
 "
 " HTML
 "
-hi! link htmlTag          HardHackerRed
-hi! link htmlEndTag       HardHackerRed
-hi! link htmlTagName      HardHackerRed
-hi! link htmlArg          HardHackerBlue
+hi! link htmlTag          HardHackerBlue
+hi! link htmlEndTag       HardHackerBlue
+hi! link htmlTagName      HardHackerBlue
+hi! link htmlArg          HardHackerRed
 hi! link htmlSpecialChar  HardHackerGreen
 
 " JAVASCRIPT

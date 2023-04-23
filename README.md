@@ -10,6 +10,8 @@ Supported Vim, MacVim and NeoVim.
 
 Since Vim only supports 256 colors, there will be some color differences with Gui Vim, especially in the background color. For best results, it is recommended to use MacVim, NeoVim or other Gui Vim.
 
+It is recommended to install the `nvim-treesitter` plugin to get the best code highlighting.
+
 ![](./media/preview.jpeg)
 
 ## Install
