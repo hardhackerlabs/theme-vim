@@ -144,22 +144,22 @@ hi! link Statement      HardHackerBlue
 hi! link Conditional    HardHackerBlue
 hi! link Label          HardHackerBlue
 hi! link Keyword        HardHackerBlue
-hi! link Operator       HardHackerFg  
+hi! link Operator       HardHackerBlue
 
 hi! link Type           HardHackerCyan
 hi! link Delimiter      HardHackerFg
 
 hi! link Tag            HardHackerCyan
-hi! link Define         HardHackerPurple
-hi! link Special        HardHackerPurple
-hi! link SpecialKey     HardHackerPurple
+hi! link Define         HardHackerCyan
+hi! link Special        HardHackerBlue
+" hi! link SpecialKey     HardHackerPurple
 hi! link SpecialComment HardHackerCyan
-hi! link StorageClass   HardHackerPurple
-hi! link Structure      HardHackerPurple
-hi! link Macro          HardHackerPurple
+hi! link StorageClass   HardHackerCyan
+hi! link Structure      HardHackerCyan
+hi! link Macro          HardHackerCyan
 hi! link PreCondit      HardHackerPurple
-hi! link Include        HardHackerRed
-hi! link Typedef        HardHackerPurple
+hi! link Include        HardHackerBlue
+hi! link Typedef        HardHackerCyan
 hi! link PreProc        HardHackerPurple
 
 hi! link DiffAdd        HardHackerGreenSelection
@@ -205,7 +205,7 @@ if has('nvim')
     
     hi! link WinSeparator               Comment
 
-    hi! link SpecialKey                 HardHackerRed
+    hi! link SpecialKey                 HardHackerBlue
     hi! link LspReferenceText           HardHackerSelection
     hi! link LspReferenceRead           HardHackerSelection
     hi! link LspReferenceWrite          HardHackerSelection
