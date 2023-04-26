@@ -12,6 +12,22 @@ Since Vim only supports 256 colors, there will be some color differences with Gu
 
 ![](./media/preview.jpeg)
 
+## 256-COLORS Palette
+
+| Palette       | XtermNum  | Hex     | 
+| ------------- | --------- | ------- | 
+| Background    | 235       | #262626 | 
+| Foreground    | 255       | #eeeeee | 
+| Selection     | 238       | #444444 | 
+| Comment       | 243       | #767676 | 
+| Red           | 205       | #ff5faf | 
+| Green         | 157       | #afffaf | 
+| Yellow        | 227       | #ffff5f | 
+| Blue          | 153       | #afd7ff | 
+| Purple        | 219       | #ffafff | 
+| Cyan          | 123       | #87ffff | 
+
+
 ## Install
 
 ### Using Git

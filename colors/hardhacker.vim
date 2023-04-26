@@ -144,7 +144,7 @@ hi! link Statement      HardHackerBlue
 hi! link Conditional    HardHackerBlue
 hi! link Label          HardHackerBlue
 hi! link Keyword        HardHackerBlue
-hi! link Operator       HardHackerBlue
+hi! link Operator       HardHackerFg
 
 hi! link Type           HardHackerCyan
 hi! link Delimiter      HardHackerFg
