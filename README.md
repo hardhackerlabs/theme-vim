@@ -60,6 +60,13 @@ If you're using neovim, you can use [lazy.nvim](https://github.com/folke/lazy.nv
     end,
   },
 ```
+
+### Using Packer.nvim
+
+```lua
+use {'hardhackerlabs/theme-vim',  as = 'hardhacker'}
+```
+
 ## Setup
 
 Add the following configuration to the `~/.vimrc` or `~/.config/nvim/init.vim` file, then restart Vim or Neovim.
