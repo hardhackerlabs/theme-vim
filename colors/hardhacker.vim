@@ -2,7 +2,6 @@
 "
 scriptencoding utf8
 highlight clear
-
 if exists("syntax_on")
   syntax reset
 endif
@@ -12,10 +11,6 @@ let g:colors_name = "hardhacker"
 
 if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolors)
   finish
-endif
-
-if !exists('g:hardhacker_darker')
-    let g:hardhacker_darker = 0
 endif
 
 " Palette
@@ -50,84 +45,135 @@ let s:black2        = "16"
 
 let s:none          = "NONE"
 
+if !exists('g:hardhacker_darker')
+    let g:hardhacker_darker = 0
+endif
+
 if g:hardhacker_darker == 1
     let s:bg = s:bg_darker
     let s:bg2 = s:bg2_darker
 endif
 
-" Set environment style
-"
-function s:hi_group(group, termfg, termbg, guifg, guibg)
+" for terminal
+let g:hardhacker#palette = {}
+let g:hardhacker#palette.color_0  = s:bg_dark
+let g:hardhacker#palette.color_1  = s:red
+let g:hardhacker#palette.color_2  = s:green
+let g:hardhacker#palette.color_3  = s:yellow
+let g:hardhacker#palette.color_4  = s:blue
+let g:hardhacker#palette.color_5  = s:purple
+let g:hardhacker#palette.color_6  = s:cyan
+let g:hardhacker#palette.color_7  = s:fg
+let g:hardhacker#palette.color_8  = '#655980'
+let g:hardhacker#palette.color_9  = s:red
+let g:hardhacker#palette.color_10 = s:green
+let g:hardhacker#palette.color_11 = s:yellow
+let g:hardhacker#palette.color_12 = s:blue
+let g:hardhacker#palette.color_13 = s:purple
+let g:hardhacker#palette.color_14 = s:cyan
+let g:hardhacker#palette.color_15 = s:fg
+
+if has('nvim')
+  for s:i in range(16)
+    let g:terminal_color_{s:i} = g:hardhacker#palette['color_' . s:i]
+  endfor
+endif
+if has('terminal')
+  let g:terminal_ansi_colors = []
+  for s:i in range(16)
+    call add(g:terminal_ansi_colors, g:hardhacker#palette['color_' . s:i])
+  endfor
+endif
+
+function s:hi_group(group, termfg, termbg, guifg, guibg, list)
+    let l:attr = 'NONE'
+    if has('nvim')
+        let l:attr = join(a:list, ',')
+    endif
     let l:hl_fields = [
         \ 'hi',
         \ a:group,
         \ 'ctermfg=' . a:termfg,
         \ 'ctermbg=' . a:termbg,
-        \ 'cterm=NONE',
+        \ 'cterm=' . l:attr,
         \ 'guifg=' . a:guifg,
         \ 'guibg=' . a:guibg,
-        \ 'gui=NONE'
+        \ 'gui=' . l:attr
         \]
     execute join(l:hl_fields, ' ')
 endfunction
 
-call s:hi_group('Cursor', s:fg2, s:red2, s:fg, s:red)
-call s:hi_group('CursorLine', s:none, s:selection2, s:none, s:selection)
-call s:hi_group('CursorLineNr', s:purple2, s:bg2, s:purple, s:bg)
-call s:hi_group('CursorColumn', s:none, s:bg2,  s:none, s:bg)
-call s:hi_group('ColorColumn', s:none, s:bg2,  s:none, s:bg)
+function s:hi_group_without_attr(group, termfg, termbg, guifg, guibg)
+    let l:list = ['NONE']
+    call s:hi_group(a:group, a:termfg, a:termbg, a:guifg, a:guibg, l:list)
+endfunction
 
-call s:hi_group('StatusLine', s:fg2, s:selection2, s:fg, s:selection)
-call s:hi_group('StatusLineNC', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group('StatusLineTerm', s:none, s:bg2, s:none, s:bg)
-call s:hi_group('StatusLineTermNC', s:none, s:bg2, s:none, s:bg)
-call s:hi_group('WildMenu', s:none, s:purple2, s:none, s:purple)
+" Set environment highlight
+"
+call s:hi_group_without_attr('Cursor', s:fg2, s:red2, s:fg, s:red)
+call s:hi_group_without_attr('CursorLine', s:none, s:selection2, s:none, s:selection)
+call s:hi_group_without_attr('CursorLineNr', s:purple2, s:bg2, s:purple, s:bg)
+call s:hi_group_without_attr('CursorColumn', s:none, s:bg2,  s:none, s:bg)
+call s:hi_group_without_attr('ColorColumn', s:none, s:bg2,  s:none, s:bg)
 
-call s:hi_group('Pmenu', s:fg2, s:selection2, s:fg, s:selection)
-call s:hi_group('PmenuSbar', s:fg2, s:selection2, s:fg, s:selection)
-call s:hi_group('PmenuSel',s:black2, s:purple2, s:black, s:purple)
-call s:hi_group('PmenuThumb',s:black2, s:purple2, s:black, s:purple)
+call s:hi_group_without_attr('StatusLine', s:fg2, s:selection2, s:fg, s:selection)
+call s:hi_group_without_attr('StatusLineNC', s:fg2, s:bg2, s:fg, s:bg)
+call s:hi_group_without_attr('StatusLineTerm', s:none, s:bg2, s:none, s:bg)
+call s:hi_group_without_attr('StatusLineTermNC', s:none, s:bg2, s:none, s:bg)
+call s:hi_group_without_attr('WildMenu', s:none, s:purple2, s:none, s:purple)
 
-call s:hi_group('Folded', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group('Normal', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group('EndOfBuffer', s:comment2, s:bg2, s:comment, s:bg) 
-call s:hi_group('LineNr', s:comment2, s:bg2, s:comment, s:bg)
-call s:hi_group('Visual',  s:none, s:selection2, s:none, s:selection)
-call s:hi_group('VisualNOS',  s:none, s:selection2, s:none, s:selection)
-call s:hi_group('Directory', s:blue2, s:none, s:blue, s:none)
-call s:hi_group('IncSearch', s:bg2, s:yellow2, s:bg, s:yellow)
-call s:hi_group('VertSplit', s:selection2, s:bg2, s:selection, s:bg)
+call s:hi_group_without_attr('Pmenu', s:fg2, s:selection2, s:fg, s:selection)
+call s:hi_group_without_attr('PmenuSbar', s:fg2, s:selection2, s:fg, s:selection)
+call s:hi_group_without_attr('PmenuSel',s:black2, s:purple2, s:black, s:purple)
+call s:hi_group_without_attr('PmenuThumb',s:black2, s:purple2, s:black, s:purple)
+
+call s:hi_group_without_attr('Folded', s:fg2, s:bg2, s:fg, s:bg)
+call s:hi_group_without_attr('Normal', s:fg2, s:bg2, s:fg, s:bg)
+call s:hi_group_without_attr('EndOfBuffer', s:comment2, s:bg2, s:comment, s:bg) 
+call s:hi_group_without_attr('LineNr', s:comment2, s:bg2, s:comment, s:bg)
+call s:hi_group_without_attr('Visual',  s:none, s:selection2, s:none, s:selection)
+call s:hi_group_without_attr('VisualNOS',  s:none, s:selection2, s:none, s:selection)
+call s:hi_group('Directory', s:blue2, s:none, s:blue, s:none, ['bold'])
+call s:hi_group_without_attr('IncSearch', s:bg2, s:yellow2, s:bg, s:yellow)
+call s:hi_group_without_attr('VertSplit', s:selection2, s:bg2, s:selection, s:bg)
 
 execute 'hi Search ctermfg='.s:bg2.' ctermbg='.s:yellow2.' cterm=underline guifg='.s:bg.' guibg='.s:yellow.' gui=underline'
 execute 'hi MatchParen ctermfg='.s:yellow2.' ctermbg=NONE cterm=underline guifg='.s:yellow.' guibg=NONE gui=underline'
 
 " Set text highlight
 "
-function s:hi_fg_group(group, ctermfg, guifg)
-    call s:hi_group(a:group, a:ctermfg, s:none, a:guifg, s:none)
+function s:hi_fg_group(group, ctermfg, guifg, ...)
+    if a:0 == 0
+        call s:hi_group_without_attr(a:group, a:ctermfg, s:none, a:guifg, s:none)
+    else 
+        let l:list = a:000
+        call s:hi_group(a:group, a:ctermfg, s:none, a:guifg, s:none, l:list)
+    endif
 endfunction
 
 function s:hi_bg_group(group, ctermbg, guibg)
-    call s:hi_group(a:group, s:none, a:ctermbg, s:none, a:guibg)
+    call s:hi_group_without_attr(a:group, s:none, a:ctermbg, s:none, a:guibg)
 endfunction
 
 call s:hi_fg_group('HardHackerRed', s:red2, s:red)
+call s:hi_fg_group('HardHackerRedBold', s:red2, s:red, 'bold')
 call s:hi_fg_group('HardHackerPurple', s:purple2, s:purple)
 call s:hi_fg_group('HardHackerBlue', s:blue2,s:blue)
 call s:hi_fg_group('HardHackerYellow', s:yellow2, s:yellow)
 call s:hi_fg_group('HardHackerCyan',s:cyan2, s:cyan)
 call s:hi_fg_group('HardHackerGreen', s:green2, s:green)
 call s:hi_fg_group('HardHackerFg', s:fg2, s:fg)
+call s:hi_fg_group('HardHackerComment',s:comment2, s:comment)
 
 call s:hi_bg_group('HardHackerBg', s:bg2, s:bg)
 call s:hi_bg_group('HardHackerSelection', s:selection2, s:selection)
 
-call s:hi_group('HardHackerBlackYellow', s:black2, s:yellow2, s:black, s:yellow)
-call s:hi_group('HardHackerGreenSelection', s:green2, s:selection2, s:green, s:selection)
-call s:hi_group('HardHackerRedSelection', s:red2, s:selection2, s:red, s:selection)
-call s:hi_group('HardHackerYellowSelection', s:yellow2, s:selection2, s:yellow, s:selection)
+call s:hi_group_without_attr('HardHackerBlackYellow', s:black2, s:yellow2, s:black, s:yellow)
+call s:hi_group_without_attr('HardHackerGreenSelection', s:green2, s:selection2, s:green, s:selection)
+call s:hi_group_without_attr('HardHackerRedSelection', s:red2, s:selection2, s:red, s:selection)
+call s:hi_group_without_attr('HardHackerYellowSelection', s:yellow2, s:selection2, s:yellow, s:selection)
 
-call s:hi_fg_group('Comment',s:comment2, s:comment)
+hi! link Comment        HardHackerComment
 hi! link String         HardHackerGreen
 hi! link Constant       HardHackerPurple
 hi! link Character      HardHackerYellow
@@ -176,9 +222,9 @@ hi! link TabLineSel     HardHackerRed
 hi! link MoreMsg        HardHackerRed
 hi! link NonText        EndOfBuffer
 hi! link WarningMsg     HardHackerYellow
-hi! link Title          HardHackerRed
+hi! link Title          HardHackerRedBold
 hi! link Question       HardHackerRed
-hi! link SignColumn     Comment
+hi! link SignColumn     HardHackerComment
 hi! link Error          HardHackerBlackYellow
 hi! link ErrorMsg       Error
 execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline'
@@ -203,8 +249,7 @@ if has('nvim')
     hi! link DiagnosticUnderlineInfo    HardHackerFg
     hi! link DiagnosticUnderlineWarn    HardHackerYellow
     
-    hi! link WinSeparator               Comment
-
+    hi! link WinSeparator               HardHackerComment
     hi! link SpecialKey                 HardHackerBlue
     hi! link LspReferenceText           HardHackerSelection
     hi! link LspReferenceRead           HardHackerSelection
