@@ -122,8 +122,8 @@ call s:hi_group_without_attr('StatusLineTerm', s:none, s:bg2, s:none, s:bg)
 call s:hi_group_without_attr('StatusLineTermNC', s:none, s:bg2, s:none, s:bg)
 call s:hi_group_without_attr('WildMenu', s:none, s:purple2, s:none, s:purple)
 
-call s:hi_group_without_attr('Pmenu', s:comment2, s:bg2, s:comment, s:bg)
-call s:hi_group_without_attr('PmenuSel', s:black2, s:purple2, s:black, s:purple)
+call s:hi_group_without_attr('Pmenu', s:fg2, s:bg2, s:fg, s:bg)
+call s:hi_group_without_attr('PmenuSel', s:none, s:selection2, s:none, s:selection)
 call s:hi_group_without_attr('PmenuSbar', s:comment2, s:bg2, s:comment, s:bg)
 call s:hi_group_without_attr('PmenuThumb', s:comment2, s:bg2, s:comment, s:bg)
 
