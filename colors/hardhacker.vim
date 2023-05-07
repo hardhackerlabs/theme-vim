@@ -124,8 +124,8 @@ call s:hi_group_without_attr('WildMenu', s:none, s:purple2, s:none, s:purple)
 
 call s:hi_group_without_attr('Pmenu', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group_without_attr('PmenuSel', s:none, s:selection2, s:none, s:selection)
-call s:hi_group_without_attr('PmenuSbar', s:comment2, s:bg2, s:comment, s:bg)
-call s:hi_group_without_attr('PmenuThumb', s:comment2, s:bg2, s:comment, s:bg)
+call s:hi_group_without_attr('PmenuSbar', s:comment2, s:purple2, s:comment, s:purple)
+call s:hi_group_without_attr('PmenuThumb', s:comment2, s:purple2, s:comment, s:purple)
 
 call s:hi_group_without_attr('Folded', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group_without_attr('Normal', s:fg2, s:bg2, s:fg, s:bg)
