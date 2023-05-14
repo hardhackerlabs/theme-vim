@@ -6,10 +6,10 @@ if exists('g:loaded_fzf') && ! exists('g:fzf_colors')
       \ 'hl':      ['fg', 'Search'],
       \ 'fg+':     ['fg', 'Normal'],
       \ 'bg+':     ['bg', 'Normal'],
-      \ 'hl+':     ['fg', 'HardHacker_Red'],
-      \ 'info':    ['fg', 'HardHacker_Purple'],
-      \ 'border':  ['fg', 'HardHacker_Purple'],
-      \ 'prompt':  ['fg', 'HardHacker_Green'],
+      \ 'hl+':     ['fg', 'HardHackerRed'],
+      \ 'info':    ['fg', 'HardHackerPurple'],
+      \ 'border':  ['fg', 'HardHackerPurple'],
+      \ 'prompt':  ['fg', 'HardHackerGreen'],
       \ 'pointer': ['fg', 'Exception'],
       \ 'marker':  ['fg', 'Keyword'],
       \ 'spinner': ['fg', 'Label'],
@@ -23,7 +23,7 @@ if exists('g:loaded_gitgutter')
     hi! link GitGutterChange DiffChange
     hi! link GitGutterDelete DiffDelete
 endif
-if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
+if has('nvim') && luaeval("pcall(require, 'gitsigns')")
     " gitsigns.nvim requires nvim > 0.5
     hi! link GitSignsAdd      DiffAdd
     hi! link GitSignsAddLn    DiffAdd
@@ -35,3 +35,31 @@ if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
     hi! link GitSignsDeleteLn DiffDelete
     hi! link GitSignsDeleteNr DiffDelete
 endif
+
+" bufferline
+if has('nvim') && luaeval("pcall(require, 'bufferline')")
+    hi! link BufferLineFill             HardHackerFillDarker
+    hi! link BufferLineOffsetSeparator  HardHackerComment
+    " hi! link BufferLineGroupSeparator   HardHackerFillDarker
+    " hi! link BufferLineSeparator        HardHackerFillDarker
+    " hi! link BufferLineTabSeparator     HardHackerFillDarker
+    " hi! link BufferLineTabSeparatorSelected HardHackerFillDarker
+    " hi! link BufferLineSeparatorSelected    HardHackerFillDarker
+    " hi! link BufferLineSeparatorVisible     HardHackerFillDarker
+endif
+
+" telescope
+if has('nvim') && luaeval("pcall(require, 'telescope')")
+    hi! link TelescopeTitle     Title
+    hi! link TelescopeBorder    HardHackerComment
+endif
+
+" neo-tree
+if has('nvim') && luaeval("pcall(require, 'neo-tree')")
+    hi! link NeoTreeGitAdded        HardHackerGreen
+    hi! link NeoTreeGitDeleted      HardHackerRed
+    hi! link NeoTreeGitModified     HardHackerYellow
+    hi! link NeoTreeGitConflict     HardHackerPurple
+    hi! link NeoTreeGitUntracked    HardHackerCyan
+endif
+

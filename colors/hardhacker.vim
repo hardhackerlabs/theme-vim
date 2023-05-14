@@ -126,6 +126,10 @@ call s:hi_group_without_attr('Pmenu', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group_without_attr('PmenuSel', s:none, s:selection2, s:none, s:selection)
 call s:hi_group_without_attr('PmenuSbar', s:comment2, s:purple2, s:comment, s:purple)
 call s:hi_group_without_attr('PmenuThumb', s:comment2, s:purple2, s:comment, s:purple)
+call s:hi_group_without_attr('PmenuKind', s:cyan2, s:bg2, s:cyan, s:bg)
+call s:hi_group_without_attr('PmenuKind', s:purple2, s:bg2, s:purple, s:bg)
+call s:hi_group_without_attr('PmenuExtra', s:fg2, s:bg2, s:fg, s:bg)
+call s:hi_group_without_attr('PmenuExtraSel', s:fg2, s:purple2, s:fg, s:purple)
 
 call s:hi_group_without_attr('Folded', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group_without_attr('Normal', s:fg2, s:bg2, s:fg, s:bg)
@@ -173,6 +177,8 @@ call s:hi_group_without_attr('HardHackerGreenSelection', s:green2, s:selection2,
 call s:hi_group_without_attr('HardHackerRedSelection', s:red2, s:selection2, s:red, s:selection)
 call s:hi_group_without_attr('HardHackerYellowSelection', s:yellow2, s:selection2, s:yellow, s:selection)
 
+call s:hi_group_without_attr('HardHackerFillDarker', s:bg2_darker, s:bg2_darker, '#1e1b26', '#1e1b26')
+
 hi! link Comment        HardHackerComment
 hi! link String         HardHackerGreen
 hi! link Constant       HardHackerPurple
@@ -197,8 +203,8 @@ hi! link Delimiter      HardHackerFg
 
 hi! link Tag            HardHackerCyan
 hi! link Define         HardHackerCyan
-hi! link Special        HardHackerBlue
-" hi! link SpecialKey     HardHackerPurple
+hi! link Special        HardHackerPurple
+hi! link SpecialKey     HardHackerPurple
 hi! link SpecialComment HardHackerCyan
 hi! link StorageClass   HardHackerCyan
 hi! link Structure      HardHackerCyan
@@ -227,6 +233,7 @@ hi! link Question       HardHackerRed
 hi! link SignColumn     HardHackerComment
 hi! link Error          HardHackerBlackYellow
 hi! link ErrorMsg       Error
+
 execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline'
 execute 'hi Todo ctermfg='.s:yellow2.' ctermbg=NONE cterm=inverse,bold guifg='.s:yellow.' guibg=NONE gui=inverse,bold,italic'
 
@@ -240,6 +247,7 @@ function s:is_valid(...)
 endfunction
 
 if has('nvim')
+    hi! link DiagnosticOk               HardHackerGreen
     hi! link DiagnosticInfo             HardHackerCyan
     hi! link DiagnosticHint             HardHackerCyan
     hi! link DiagnosticError            HardHackerRed
@@ -250,7 +258,6 @@ if has('nvim')
     hi! link DiagnosticUnderlineWarn    HardHackerYellow
     
     hi! link WinSeparator               HardHackerComment
-    hi! link SpecialKey                 HardHackerBlue
     hi! link LspReferenceText           HardHackerSelection
     hi! link LspReferenceRead           HardHackerSelection
     hi! link LspReferenceWrite          HardHackerSelection
@@ -263,8 +270,18 @@ if has('nvim')
     hi! link LspDiagnosticsUnderlineHint        DiagnosticUnderlineHint
     hi! link LspDiagnosticsUnderlineInformation DiagnosticUnderlineInfo
     hi! link LspDiagnosticsUnderlineWarning     DiagnosticUnderlineWarn
-else
-    hi! link SpecialKey HardHackerPurple
+
+    hi! link ModeMsg        HardHackerGreen
+    hi! link MsgArea        HardHackerPurple
+    hi! link MsgSeparator   HardHackerComment
+    hi! link NormalFloat    Normal
+    hi! link FloatBorder    HardHackerComment
+    hi! link FloatTitle     Title
+
+    hi! link NvimInternalError      Error
+
+    hi FloatShadow guibg=s:red
+    hi FloatShadowThrough guibg=s:red
 endif
 
 
