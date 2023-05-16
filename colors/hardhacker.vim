@@ -258,9 +258,15 @@ if has('nvim')
     hi! link DiagnosticUnderlineWarn    HardHackerYellow
     
     hi! link WinSeparator               HardHackerComment
+
     hi! link LspReferenceText           HardHackerSelection
     hi! link LspReferenceRead           HardHackerSelection
     hi! link LspReferenceWrite          HardHackerSelection
+    hi! link LspInfoBorder              HardHackerComment
+    " LspInfoFiletype
+    " LspInfoList
+    " LspInfoTip
+    " LspInfoTitle
 
     hi! link LspDiagnosticsDefaultInformation   DiagnosticInfo
     hi! link LspDiagnosticsDefaultHint          DiagnosticHint

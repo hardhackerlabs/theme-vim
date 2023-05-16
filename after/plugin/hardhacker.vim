@@ -63,3 +63,19 @@ if has('nvim') && luaeval("pcall(require, 'neo-tree')")
     hi! link NeoTreeGitUntracked    HardHackerCyan
 endif
 
+" dashboard-nvim
+if has('nvim') && luaeval("pcall(require, 'dashboard')")
+    hi! link DashboardHeader    HardHackerRed
+    hi! link DashboardFooter    HardHackerComment
+    " DashboardProjectTitle
+    " DashboardProjectTitleIcon
+    hi! link DashboardMruTitle  Title
+    " DashboardFiles
+    " DashboardShortCut
+endif
+
+" nvim-cmp
+if has('nvim') && luaeval("pcall(require, 'cmp')")
+    hi! link CmpItemKindDefault         Type
+    hi! link CmpItemAbbrMatchDefault    HardHackerPurple
+endif
