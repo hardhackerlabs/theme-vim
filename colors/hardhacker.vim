@@ -13,8 +13,18 @@ if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolo
   finish
 endif
 
+if !exists('g:hardhacker_darker')
+    let g:hardhacker_darker = 0
+endif
+
+if !exists('g:hardhacker_hide_tilde')
+    let g:hardhacker_hide_tilde = 1
+endif
+
 " Palette
 "
+
+let s:black         = "#19181f"
 let s:bg_darker     = "#211e2a"
 let s:bg_dark       = "#282433"
 let s:bg            = s:bg_dark
@@ -27,7 +37,6 @@ let s:yellow        = "#ebde76"
 let s:blue          = "#b1baf4"
 let s:purple        = "#e192ef"
 let s:cyan          = "#b3f4f3"
-let s:black         = "#000000"
 
 let s:bg2_darker    = "234"
 let s:bg2_dark      = "235"
@@ -44,10 +53,6 @@ let s:cyan2         = "123"
 let s:black2        = "16"
 
 let s:none          = "NONE"
-
-if !exists('g:hardhacker_darker')
-    let g:hardhacker_darker = 0
-endif
 
 if g:hardhacker_darker == 1
     let s:bg = s:bg_darker
@@ -124,8 +129,8 @@ call s:hi_group_without_attr('WildMenu', s:none, s:purple2, s:none, s:purple)
 
 call s:hi_group_without_attr('Pmenu', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group_without_attr('PmenuSel', s:none, s:selection2, s:none, s:selection)
-call s:hi_group_without_attr('PmenuSbar', s:comment2, s:purple2, s:comment, s:purple)
-call s:hi_group_without_attr('PmenuThumb', s:comment2, s:purple2, s:comment, s:purple)
+call s:hi_group_without_attr('PmenuSbar', s:black2, s:purple2, s:black, s:purple)
+call s:hi_group_without_attr('PmenuThumb', s:black2, s:purple2, s:black, s:purple)
 call s:hi_group_without_attr('PmenuKind', s:cyan2, s:bg2, s:cyan, s:bg)
 call s:hi_group_without_attr('PmenuKind', s:purple2, s:bg2, s:purple, s:bg)
 call s:hi_group_without_attr('PmenuExtra', s:fg2, s:bg2, s:fg, s:bg)
@@ -133,16 +138,22 @@ call s:hi_group_without_attr('PmenuExtraSel', s:fg2, s:purple2, s:fg, s:purple)
 
 call s:hi_group_without_attr('Folded', s:fg2, s:bg2, s:fg, s:bg)
 call s:hi_group_without_attr('Normal', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group_without_attr('EndOfBuffer', s:comment2, s:bg2, s:comment, s:bg) 
 call s:hi_group_without_attr('LineNr', s:comment2, s:bg2, s:comment, s:bg)
 call s:hi_group_without_attr('Visual',  s:none, s:selection2, s:none, s:selection)
 call s:hi_group_without_attr('VisualNOS',  s:none, s:selection2, s:none, s:selection)
-call s:hi_group('Directory', s:blue2, s:none, s:blue, s:none, ['bold'])
 call s:hi_group_without_attr('IncSearch', s:bg2, s:yellow2, s:bg, s:yellow)
-call s:hi_group_without_attr('VertSplit', s:selection2, s:bg2, s:selection, s:bg)
+call s:hi_group_without_attr('VertSplit', s:black2, s:bg2, s:black, s:bg)
 
-execute 'hi Search ctermfg='.s:bg2.' ctermbg='.s:yellow2.' cterm=underline guifg='.s:bg.' guibg='.s:yellow.' gui=underline'
-execute 'hi MatchParen ctermfg='.s:yellow2.' ctermbg=NONE cterm=underline guifg='.s:yellow.' guibg=NONE gui=underline'
+call s:hi_group('Directory', s:blue2, s:none, s:blue, s:none, ['bold'])
+call s:hi_group('Search', s:bg2, s:yellow2, s:bg, s:yellow, ['underline'])
+call s:hi_group('MatchParen', s:yellow2, 'NONE', s:yellow, 'NONE', ['underline'])
+
+if g:hardhacker_hide_tilde == 1
+    call s:hi_group_without_attr('EndOfBuffer', s:bg2, s:bg2, s:bg, s:bg) 
+else 
+    call s:hi_group_without_attr('EndOfBuffer', s:comment2, s:bg2, s:comment, s:bg) 
+endif
+
 
 " Set text highlight
 "
@@ -159,8 +170,8 @@ function s:hi_bg_group(group, ctermbg, guibg)
     call s:hi_group_without_attr(a:group, s:none, a:ctermbg, s:none, a:guibg)
 endfunction
 
+" foreground color
 call s:hi_fg_group('HardHackerRed', s:red2, s:red)
-call s:hi_fg_group('HardHackerRedBold', s:red2, s:red, 'bold')
 call s:hi_fg_group('HardHackerPurple', s:purple2, s:purple)
 call s:hi_fg_group('HardHackerBlue', s:blue2,s:blue)
 call s:hi_fg_group('HardHackerYellow', s:yellow2, s:yellow)
@@ -169,10 +180,28 @@ call s:hi_fg_group('HardHackerGreen', s:green2, s:green)
 call s:hi_fg_group('HardHackerFg', s:fg2, s:fg)
 call s:hi_fg_group('HardHackerComment',s:comment2, s:comment)
 
+call s:hi_fg_group('HardHackerBorder',s:comment2, s:comment)
+
+" foreground color + bold 
+call s:hi_fg_group('HardHackerRedBold', s:red2, s:red, 'bold')
+
+" foreground color + underline
+call s:hi_fg_group('HardHackerRedUnderline', s:red2, s:red, 'underline')
+call s:hi_fg_group('HardHackerPurpleUnderline', s:purple2, s:purple, 'underline')
+call s:hi_fg_group('HardHackerBlueUnderline', s:blue2,s:blue, 'underline')
+call s:hi_fg_group('HardHackerYellowUnderline', s:yellow2, s:yellow, 'underline')
+call s:hi_fg_group('HardHackerCyanUnderline',s:cyan2, s:cyan, 'underline')
+call s:hi_fg_group('HardHackerGreenUnderline', s:green2, s:green, 'underline')
+call s:hi_fg_group('HardHackerFgUnderline', s:fg2, s:fg, 'underline')
+call s:hi_fg_group('HardHackerCommentUnderline',s:comment2, s:comment, 'underline')
+
+" background color
 call s:hi_bg_group('HardHackerBg', s:bg2, s:bg)
 call s:hi_bg_group('HardHackerSelection', s:selection2, s:selection)
 
+" fourground + background color
 call s:hi_group_without_attr('HardHackerBlackYellow', s:black2, s:yellow2, s:black, s:yellow)
+call s:hi_group_without_attr('HardHackerWhiteRed', s:fg2, s:red2, s:fg, s:red)
 call s:hi_group_without_attr('HardHackerGreenSelection', s:green2, s:selection2, s:green, s:selection)
 call s:hi_group_without_attr('HardHackerRedSelection', s:red2, s:selection2, s:red, s:selection)
 call s:hi_group_without_attr('HardHackerYellowSelection', s:yellow2, s:selection2, s:yellow, s:selection)
@@ -249,20 +278,20 @@ endfunction
 if has('nvim')
     hi! link DiagnosticOk               HardHackerGreen
     hi! link DiagnosticInfo             HardHackerCyan
-    hi! link DiagnosticHint             HardHackerCyan
+    hi! link DiagnosticHint             HardHackerPurple
     hi! link DiagnosticError            HardHackerRed
     hi! link DiagnosticWarn             HardHackerYellow
-    hi! link DiagnosticUnderlineError   HardHackerRed
-    hi! link DiagnosticUnderlineHint    HardHackerFg
-    hi! link DiagnosticUnderlineInfo    HardHackerFg
-    hi! link DiagnosticUnderlineWarn    HardHackerYellow
+    hi! link DiagnosticUnderlineInfo    HardHackerCyanUnderline
+    hi! link DiagnosticUnderlineHint    HardHackerPurpleUnderline
+    hi! link DiagnosticUnderlineError   HardHackerRedUnderline
+    hi! link DiagnosticUnderlineWarn    HardHackerYellowUnderline
     
-    hi! link WinSeparator               HardHackerComment
+    hi! link WinSeparator               VertSplit
 
     hi! link LspReferenceText           HardHackerSelection
     hi! link LspReferenceRead           HardHackerSelection
     hi! link LspReferenceWrite          HardHackerSelection
-    hi! link LspInfoBorder              HardHackerComment
+    hi! link LspInfoBorder              HardHackerBorder
     " LspInfoFiletype
     " LspInfoList
     " LspInfoTip
@@ -281,7 +310,7 @@ if has('nvim')
     hi! link MsgArea        HardHackerPurple
     hi! link MsgSeparator   HardHackerComment
     hi! link NormalFloat    Normal
-    hi! link FloatBorder    HardHackerComment
+    hi! link FloatBorder    HardHackerBorder
     hi! link FloatTitle     Title
 
     hi! link NvimInternalError      Error

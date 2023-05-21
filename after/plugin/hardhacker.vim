@@ -8,7 +8,7 @@ if exists('g:loaded_fzf') && ! exists('g:fzf_colors')
       \ 'bg+':     ['bg', 'Normal'],
       \ 'hl+':     ['fg', 'HardHackerRed'],
       \ 'info':    ['fg', 'HardHackerPurple'],
-      \ 'border':  ['fg', 'HardHackerPurple'],
+      \ 'border':  ['fg', 'HardHackerBorder'],
       \ 'prompt':  ['fg', 'HardHackerGreen'],
       \ 'pointer': ['fg', 'Exception'],
       \ 'marker':  ['fg', 'Keyword'],
@@ -26,20 +26,20 @@ endif
 if has('nvim') && luaeval("pcall(require, 'gitsigns')")
     " gitsigns.nvim requires nvim > 0.5
     hi! link GitSignsAdd      DiffAdd
-    hi! link GitSignsAddLn    DiffAdd
-    hi! link GitSignsAddNr    DiffAdd
+    hi! link GitSignsAddLn    GitSignsAdd
+    hi! link GitSignsAddNr    GitSignsAdd
     hi! link GitSignsChange   DiffChange
-    hi! link GitSignsChangeLn DiffChange
-    hi! link GitSignsChangeNr DiffChange
+    hi! link GitSignsChangeLn GitSignsChange
+    hi! link GitSignsChangeNr GitSignsChange
     hi! link GitSignsDelete   DiffDelete
-    hi! link GitSignsDeleteLn DiffDelete
-    hi! link GitSignsDeleteNr DiffDelete
+    hi! link GitSignsDeleteLn GitSignsDelete
+    hi! link GitSignsDeleteNr GitSignsDelete
 endif
 
 " bufferline
 if has('nvim') && luaeval("pcall(require, 'bufferline')")
     hi! link BufferLineFill             HardHackerFillDarker
-    hi! link BufferLineOffsetSeparator  HardHackerComment
+    hi! link BufferLineOffsetSeparator  VertSplit
     " hi! link BufferLineGroupSeparator   HardHackerFillDarker
     " hi! link BufferLineSeparator        HardHackerFillDarker
     " hi! link BufferLineTabSeparator     HardHackerFillDarker
@@ -51,7 +51,7 @@ endif
 " telescope
 if has('nvim') && luaeval("pcall(require, 'telescope')")
     hi! link TelescopeTitle     Title
-    hi! link TelescopeBorder    HardHackerComment
+    hi! link TelescopeBorder    HardHackerBorder
 endif
 
 " neo-tree
@@ -78,4 +78,8 @@ endif
 if has('nvim') && luaeval("pcall(require, 'cmp')")
     hi! link CmpItemKindDefault         Type
     hi! link CmpItemAbbrMatchDefault    HardHackerPurple
+endif
+
+if has('nvim') && luaeval("pcall(require, 'aerial')")
+    hi! link AerialLine  HardHackerYellow
 endif
