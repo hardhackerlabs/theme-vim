@@ -83,3 +83,14 @@ endif
 if has('nvim') && luaeval("pcall(require, 'aerial')")
     hi! link AerialLine  HardHackerYellow
 endif
+
+if has('nvim') && luaeval("pcall(require, 'noice')")
+    hi! link NoicePopupBorder        FloatBorder
+    hi! link NoiceCmdlinePopupBorder FloatBorder
+    hi! link NoiceConfirmBorder      FloatBorder
+endif
+
+if has('nvim') && luaeval("pcall(require, 'toggleterm')")
+    hi! link ToggleTerm1EndOfBuffer  EndOfBuffer
+    hi! link ToggleTerm1SignColumn   EndOfBuffer
+endif

@@ -13,13 +13,37 @@ if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolo
   finish
 endif
 
+" Global variable
+"
 if !exists('g:hardhacker_darker')
     let g:hardhacker_darker = 0
 endif
-
 if !exists('g:hardhacker_hide_tilde')
     let g:hardhacker_hide_tilde = 1
 endif
+if !exists('g:hardhacker_keyword_italic')
+    let g:hardhacker_keyword_italic = 1
+endif
+
+" Utils
+"
+function! s:blend_colors(foreground_color, background_color, opacity)
+    let tr = "0x" . strpart(a:foreground_color, 1, 2)
+    let tg = "0x" . strpart(a:foreground_color, 3, 2)
+    let tb = "0x" . strpart(a:foreground_color, 5, 2)
+
+    let br = "0x" . strpart(a:background_color, 1, 2)
+    let bg = "0x" . strpart(a:background_color, 3, 2)
+    let bb = "0x" . strpart(a:background_color, 5, 2)
+
+    let r = (tr * a:opacity + br * (100 - a:opacity)) / 100
+    let g = (tg * a:opacity + bg * (100 - a:opacity)) / 100
+    let b = (tb * a:opacity + bb * (100 - a:opacity)) / 100
+
+    let blended_color = printf("#%02X%02X%02X", r, g, b)
+
+    return blended_color
+endfunction
 
 " Palette
 "
@@ -54,6 +78,7 @@ let s:black2        = "16"
 
 let s:none          = "NONE"
 
+" preprocess
 if g:hardhacker_darker == 1
     let s:bg = s:bg_darker
     let s:bg2 = s:bg2_darker
@@ -195,20 +220,33 @@ call s:hi_fg_group('HardHackerGreenUnderline', s:green2, s:green, 'underline')
 call s:hi_fg_group('HardHackerFgUnderline', s:fg2, s:fg, 'underline')
 call s:hi_fg_group('HardHackerCommentUnderline',s:comment2, s:comment, 'underline')
 
+" foreground color + italic
+call s:hi_fg_group('HardHackerCommentItalic',s:comment2, s:comment, 'italic')
+call s:hi_fg_group('HardHackerBlueItalic', s:blue2, s:blue, 'italic')
+
 " background color
 call s:hi_bg_group('HardHackerBg', s:bg2, s:bg)
 call s:hi_bg_group('HardHackerSelection', s:selection2, s:selection)
 
-" fourground + background color
+" foreground + background color
+"
 call s:hi_group_without_attr('HardHackerBlackYellow', s:black2, s:yellow2, s:black, s:yellow)
 call s:hi_group_without_attr('HardHackerWhiteRed', s:fg2, s:red2, s:fg, s:red)
 call s:hi_group_without_attr('HardHackerGreenSelection', s:green2, s:selection2, s:green, s:selection)
 call s:hi_group_without_attr('HardHackerRedSelection', s:red2, s:selection2, s:red, s:selection)
 call s:hi_group_without_attr('HardHackerYellowSelection', s:yellow2, s:selection2, s:yellow, s:selection)
 
+" foreground + background blend
+call s:hi_group_without_attr('HardHackerPurplePurple', s:purple2, s:comment2, s:purple, s:blend_colors(s:purple, s:bg, 10))
+call s:hi_group_without_attr('HardHackerRedRed', s:red2, s:comment2, s:red, s:blend_colors(s:red, s:bg, 10))
+call s:hi_group_without_attr('HardHackerCyanCyan', s:cyan2, s:comment2, s:cyan, s:blend_colors(s:cyan, s:bg, 10))
+call s:hi_group_without_attr('HardHackerRedRed', s:red2, s:comment2, s:red, s:blend_colors(s:red, s:bg, 10))
+call s:hi_group_without_attr('HardHackerYellowYellow', s:yellow2, s:comment2, s:yellow, s:blend_colors(s:yellow, s:bg, 10))
+
+" black + black
 call s:hi_group_without_attr('HardHackerFillDarker', s:bg2_darker, s:bg2_darker, '#1e1b26', '#1e1b26')
 
-hi! link Comment        HardHackerComment
+hi! link Comment        HardHackerCommentItalic
 hi! link String         HardHackerGreen
 hi! link Constant       HardHackerPurple
 hi! link Character      HardHackerYellow
@@ -224,8 +262,13 @@ hi! link Repeat         HardHackerBlue
 hi! link Statement      HardHackerBlue
 hi! link Conditional    HardHackerBlue
 hi! link Label          HardHackerBlue
-hi! link Keyword        HardHackerBlue
 hi! link Operator       HardHackerFg
+
+if g:hardhacker_keyword_italic == 1 
+    hi! link Keyword        HardHackerBlueItalic
+else 
+    hi! link Keyword        HardHackerBlue
+endif
 
 hi! link Type           HardHackerCyan
 hi! link Delimiter      HardHackerFg
@@ -267,7 +310,7 @@ execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guib
 execute 'hi Todo ctermfg='.s:yellow2.' ctermbg=NONE cterm=inverse,bold guifg='.s:yellow.' guibg=NONE gui=inverse,bold,italic'
 
 function s:is_valid(...)
-    if ! exists('s:colors_name') || s:colors_name !=# 'hardhacker'
+    if ! exists('s:lualine_colors_name') || s:lualine_colors_name !=# 'hardhacker'
         return 0
     elseif a:0 > 0 && (exists('b:current_syntax') && index(a:000, b:current_syntax) != -1)
         return 1
@@ -277,16 +320,24 @@ endfunction
 
 if has('nvim')
     hi! link DiagnosticOk               HardHackerGreen
-    hi! link DiagnosticInfo             HardHackerCyan
-    hi! link DiagnosticHint             HardHackerPurple
     hi! link DiagnosticError            HardHackerRed
+    hi! link DiagnosticHint             HardHackerPurple
+    hi! link DiagnosticInfo             HardHackerCyan
     hi! link DiagnosticWarn             HardHackerYellow
-    hi! link DiagnosticUnderlineInfo    HardHackerCyanUnderline
-    hi! link DiagnosticUnderlineHint    HardHackerPurpleUnderline
+
+    hi! link DiagnosticVirtualTextError HardHackerRedRed
+    hi! link DiagnosticVirtualTextHint  HardHackerPurplePurple
+    hi! link DiagnosticVirtualTextInfo  HardHackerCyanCyan
+    hi! link DiagnosticVirtualTextWarn  HardHackerYellowYellow
+
     hi! link DiagnosticUnderlineError   HardHackerRedUnderline
+    hi! link DiagnosticUnderlineHint    HardHackerPurpleUnderline
+    hi! link DiagnosticUnderlineInfo    HardHackerCyanUnderline
     hi! link DiagnosticUnderlineWarn    HardHackerYellowUnderline
     
     hi! link WinSeparator               VertSplit
+
+    hi! link LspCodeLens                Comment
 
     hi! link LspReferenceText           HardHackerSelection
     hi! link LspReferenceRead           HardHackerSelection
@@ -297,9 +348,9 @@ if has('nvim')
     " LspInfoTip
     " LspInfoTitle
 
-    hi! link LspDiagnosticsDefaultInformation   DiagnosticInfo
-    hi! link LspDiagnosticsDefaultHint          DiagnosticHint
     hi! link LspDiagnosticsDefaultError         DiagnosticError
+    hi! link LspDiagnosticsDefaultHint          DiagnosticHint
+    hi! link LspDiagnosticsDefaultInformation   DiagnosticInfo
     hi! link LspDiagnosticsDefaultWarning       DiagnosticWarn
     hi! link LspDiagnosticsUnderlineError       DiagnosticUnderlineError
     hi! link LspDiagnosticsUnderlineHint        DiagnosticUnderlineHint
@@ -312,6 +363,8 @@ if has('nvim')
     hi! link NormalFloat    Normal
     hi! link FloatBorder    HardHackerBorder
     hi! link FloatTitle     Title
+
+    hi! link CursorIM       Cursor
 
     hi! link NvimInternalError      Error
 
@@ -415,3 +468,38 @@ hi! link jsonKeyword      HardHackerPurple
 " Shell
 "
 hi! link shEscape HardHackerRed
+
+
+" lualine theme
+"
+let s:lualine_colors = {
+      \ 'red': '#e965a5',
+      \ 'green': '#b1f2a7',
+      \ 'yellow': '#ebde76',
+      \ 'blue': '#b1baf4',
+      \ 'purple': '#e192ef',
+      \ 'cyan': '#b3f4f3',
+      \ 'white': '#eee9fc',
+      \ 'black': '#282433',
+      \ 'selection': '#282433',
+      \ 'comment': '#938aad',
+      \ }
+
+let s:lualine_theme = {
+      \ 'normal': {
+          \ 'a': { 'fg': s:lualine_colors['black'], 'bg': s:lualine_colors['purple'] },
+          \ 'b': { 'fg': s:lualine_colors['red'], 'bg': s:lualine_colors['selection'] },
+          \ 'c': { 'fg': s:lualine_colors['comment'], 'bg': s:lualine_colors['selection'] },
+          \ },
+      \ 'insert': { 'a': { 'fg': s:lualine_colors['black'], 'bg': s:lualine_colors['green'] } },
+      \ 'visual': { 'a': { 'fg': s:lualine_colors['black'], 'bg': s:lualine_colors['yellow'] } },
+      \ 'replace': { 'a': { 'fg': s:lualine_colors['black'], 'bg': s:lualine_colors['red'] } },
+      \ 'inactive': {
+          \ 'a': { 'fg': s:lualine_colors['white'], 'bg': s:lualine_colors['selection'] },
+          \ 'b': { 'fg': s:lualine_colors['white'], 'bg': s:lualine_colors['selection'] },
+          \ 'c': { 'fg': s:lualine_colors['white'], 'bg': s:lualine_colors['selection'] },
+          \ },
+      \ }
+
+let g:hardhacker_lualine_theme = s:lualine_theme
+

@@ -14,19 +14,18 @@ Since Vim only supports 256 colors, there will be some color differences with Gu
 
 ## 256-COLORS Palette
 
-| Palette       | XtermNum  | Hex     | 
-| ------------- | --------- | ------- | 
-| Background    | 235       | #262626 | 
-| Foreground    | 255       | #eeeeee | 
-| Selection     | 238       | #444444 | 
-| Comment       | 243       | #767676 | 
-| Red           | 205       | #ff5faf | 
-| Green         | 157       | #afffaf | 
-| Yellow        | 227       | #ffff5f | 
-| Blue          | 153       | #afd7ff | 
-| Purple        | 219       | #ffafff | 
-| Cyan          | 123       | #87ffff | 
-
+| Palette    | XtermNum | Hex     |
+| ---------- | -------- | ------- |
+| Background | 235      | #262626 |
+| Foreground | 255      | #eeeeee |
+| Selection  | 238      | #444444 |
+| Comment    | 243      | #767676 |
+| Red        | 205      | #ff5faf |
+| Green      | 157      | #afffaf |
+| Yellow     | 227      | #ffff5f |
+| Blue       | 153      | #afd7ff |
+| Purple     | 219      | #ffafff |
+| Cyan       | 123      | #87ffff |
 
 ## Install
 
@@ -50,15 +49,24 @@ Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
 ```
 
 ### Using Lazy.nvim (for neovim user)
+
 If you're using neovim, you can use [lazy.nvim](https://github.com/folke/lazy.nvim) too
+
 ```lua
--- init.lua:
-  {
-    'hardhackerlabs/theme-vim',
-    config = function()
-      vim.cmd.colorscheme 'hardhacker'
-    end,
-  },
+{
+  "hardhackerlabs/theme-vim",
+  name = "hardhacker",
+  lazy = false,
+  priority = 1000,
+  init = function()
+    vim.g.hardhacker_darker = 0
+    vim.g.hardhacker_hide_tilde = 1
+    vim.g.hardhacker_keyword_italic = 1
+  end,
+  config = function()
+    vim.cmd("colorscheme hardhacker")
+  end,
+},
 ```
 
 ### Using Packer.nvim
