@@ -38,11 +38,11 @@ endif
 
 " bufferline
 if has('nvim') && luaeval("pcall(require, 'bufferline')")
-    hi! link BufferLineFill             HardHackerFillDarker
-    hi! link BufferLineOffsetSeparator  VertSplit
-    " hi! link BufferLineGroupSeparator   HardHackerFillDarker
-    " hi! link BufferLineSeparator        HardHackerFillDarker
-    " hi! link BufferLineTabSeparator     HardHackerFillDarker
+    hi! link BufferLineFill                 HardHackerFillDarker
+    hi! link BufferLineOffsetSeparator      VertSplit
+    " hi! link BufferLineGroupSeparator       HardHackerFillDarker
+    " hi! link BufferLineSeparator            HardHackerFillDarker
+    " hi! link BufferLineTabSeparator         HardHackerFillDarker
     " hi! link BufferLineTabSeparatorSelected HardHackerFillDarker
     " hi! link BufferLineSeparatorSelected    HardHackerFillDarker
     " hi! link BufferLineSeparatorVisible     HardHackerFillDarker
@@ -61,6 +61,12 @@ if has('nvim') && luaeval("pcall(require, 'neo-tree')")
     hi! link NeoTreeGitModified     HardHackerYellow
     hi! link NeoTreeGitConflict     HardHackerPurple
     hi! link NeoTreeGitUntracked    HardHackerCyan
+    hi! link NeoTreeFileName        HardHackerBlue2
+    hi! link NeoTreeRootName        NeoTreeDirectoryName
+    hi! link NeoTreeFloatTitle      Title
+
+    hi! link NeoTreeNormal          HardHackerComment
+    hi! link NeoTreeNormalNC        HardHackerComment
 endif
 
 " dashboard-nvim
@@ -81,7 +87,8 @@ if has('nvim') && luaeval("pcall(require, 'cmp')")
 endif
 
 if has('nvim') && luaeval("pcall(require, 'aerial')")
-    hi! link AerialLine  HardHackerYellow
+    hi! link AerialLine  HardHackerRed
+    hi! link NONE        HardHackerBlue2
 endif
 
 if has('nvim') && luaeval("pcall(require, 'noice')")
