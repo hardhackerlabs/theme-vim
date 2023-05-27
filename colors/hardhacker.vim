@@ -2,12 +2,12 @@
 "
 scriptencoding utf8
 highlight clear
-if exists("syntax_on")
+if exists('syntax_on')
   syntax reset
 endif
 
 set background=dark
-let g:colors_name = "hardhacker"
+let g:colors_name = 'hardhacker'
 
 if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolors)
   finish
@@ -28,19 +28,19 @@ endif
 " Utils
 "
 function! s:blend_colors(foreground_color, background_color, opacity)
-    let tr = "0x" . strpart(a:foreground_color, 1, 2)
-    let tg = "0x" . strpart(a:foreground_color, 3, 2)
-    let tb = "0x" . strpart(a:foreground_color, 5, 2)
+    let tr = '0x' . strpart(a:foreground_color, 1, 2)
+    let tg = '0x' . strpart(a:foreground_color, 3, 2)
+    let tb = '0x' . strpart(a:foreground_color, 5, 2)
 
-    let br = "0x" . strpart(a:background_color, 1, 2)
-    let bg = "0x" . strpart(a:background_color, 3, 2)
-    let bb = "0x" . strpart(a:background_color, 5, 2)
+    let br = '0x' . strpart(a:background_color, 1, 2)
+    let bg = '0x' . strpart(a:background_color, 3, 2)
+    let bb = '0x' . strpart(a:background_color, 5, 2)
 
     let r = (tr * a:opacity + br * (100 - a:opacity)) / 100
     let g = (tg * a:opacity + bg * (100 - a:opacity)) / 100
     let b = (tb * a:opacity + bb * (100 - a:opacity)) / 100
 
-    let blended_color = printf("#%02X%02X%02X", r, g, b)
+    let blended_color = printf('#%02X%02X%02X', r, g, b)
 
     return blended_color
 endfunction
@@ -48,40 +48,40 @@ endfunction
 " Palette
 "
 
-let s:black         = "#19181f"
-let s:bg_darker     = "#211e2a"
-let s:bg_dark       = "#282433"
+let s:black         = '#19181f'
+let s:bg_darker     = '#211e2a'
+let s:bg_dark       = '#282433'
 let s:bg            = s:bg_dark
-let s:fg            = "#eee9fc"
-let s:selection     = "#3f3951"
-let s:comment       = "#938AAD"
-let s:red           = "#e965a5"
-let s:green         = "#b1f2a7"
-let s:yellow        = "#ebde76"
-let s:blue          = "#b1baf4"
-let s:purple        = "#e192ef"
-let s:cyan          = "#b3f4f3"
+let s:fg            = '#eee9fc'
+let s:selection     = '#3f3951'
+let s:comment       = '#938AAD'
+let s:red           = '#e965a5'
+let s:green         = '#b1f2a7'
+let s:yellow        = '#ebde76'
+let s:blue          = '#b1baf4'
+let s:purple        = '#e192ef'
+let s:cyan          = '#b3f4f3'
 
-let s:bg2_darker    = "234"
-let s:bg2_dark      = "235"
-let s:bg2           = s:bg2_dark
-let s:fg2           = "255"
-let s:selection2    = "238"
-let s:comment2      = "243"
-let s:red2          = "205" "212
-let s:green2        = "157"
-let s:yellow2       = "227"
-let s:blue2         = "153"
-let s:purple2       = "219"
-let s:cyan2         = "123"
-let s:black2        = "16"
+let s:term_bg_darker    = '234'
+let s:term_bg_dark      = '235'
+let s:term_bg           = s:term_bg_dark
+let s:term_fg           = '255'
+let s:term_selection    = '238'
+let s:term_comment      = '243'
+let s:term_red          = '205' "212
+let s:term_green        = '157'
+let s:term_yellow       = '227'
+let s:term_blue         = '153'
+let s:term_purple       = '219'
+let s:term_cyan         = '123'
+let s:term_black        = '16'
 
-let s:none          = "NONE"
+let s:none          = 'NONE'
 
 " preprocess
 if g:hardhacker_darker == 1
     let s:bg = s:bg_darker
-    let s:bg2 = s:bg2_darker
+    let s:term_bg = s:term_bg_darker
 endif
 
 " for terminal
@@ -140,43 +140,43 @@ endfunction
 
 " Set environment highlight
 "
-call s:hi_group_without_attr('Cursor', s:fg2, s:red2, s:fg, s:red)
-call s:hi_group_without_attr('CursorLine', s:none, s:selection2, s:none, s:selection)
-call s:hi_group_without_attr('CursorLineNr', s:purple2, s:bg2, s:purple, s:bg)
-call s:hi_group_without_attr('CursorColumn', s:none, s:bg2,  s:none, s:bg)
-call s:hi_group_without_attr('ColorColumn', s:none, s:bg2,  s:none, s:bg)
+call s:hi_group_without_attr('Cursor', s:term_fg, s:term_red, s:fg, s:red)
+call s:hi_group_without_attr('CursorLine', s:none, s:term_selection, s:none, s:selection)
+call s:hi_group_without_attr('CursorLineNr', s:term_purple, s:term_bg, s:purple, s:bg)
+call s:hi_group_without_attr('CursorColumn', s:none, s:term_bg,  s:none, s:bg)
+call s:hi_group_without_attr('ColorColumn', s:none, s:term_bg,  s:none, s:bg)
 
-call s:hi_group_without_attr('StatusLine', s:fg2, s:selection2, s:fg, s:selection)
-call s:hi_group_without_attr('StatusLineNC', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group_without_attr('StatusLineTerm', s:none, s:bg2, s:none, s:bg)
-call s:hi_group_without_attr('StatusLineTermNC', s:none, s:bg2, s:none, s:bg)
-call s:hi_group_without_attr('WildMenu', s:none, s:purple2, s:none, s:purple)
+call s:hi_group_without_attr('StatusLine', s:term_fg, s:term_selection, s:fg, s:selection)
+call s:hi_group_without_attr('StatusLineNC', s:term_fg, s:term_bg, s:fg, s:bg)
+call s:hi_group_without_attr('StatusLineTerm', s:none, s:term_bg, s:none, s:bg)
+call s:hi_group_without_attr('StatusLineTermNC', s:none, s:term_bg, s:none, s:bg)
+call s:hi_group_without_attr('WildMenu', s:none, s:term_purple, s:none, s:purple)
 
-call s:hi_group_without_attr('Pmenu', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group_without_attr('PmenuSel', s:none, s:selection2, s:none, s:selection)
-call s:hi_group_without_attr('PmenuSbar', s:black2, s:purple2, s:black, s:purple)
-call s:hi_group_without_attr('PmenuThumb', s:black2, s:purple2, s:black, s:purple)
-call s:hi_group_without_attr('PmenuKind', s:cyan2, s:bg2, s:cyan, s:bg)
-call s:hi_group_without_attr('PmenuKind', s:purple2, s:bg2, s:purple, s:bg)
-call s:hi_group_without_attr('PmenuExtra', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group_without_attr('PmenuExtraSel', s:fg2, s:purple2, s:fg, s:purple)
+call s:hi_group_without_attr('Pmenu', s:term_fg, s:term_bg, s:fg, s:bg)
+call s:hi_group_without_attr('PmenuSel', s:none, s:term_selection, s:none, s:selection)
+call s:hi_group_without_attr('PmenuSbar', s:term_black, s:term_purple, s:black, s:purple)
+call s:hi_group_without_attr('PmenuThumb', s:term_black, s:term_purple, s:black, s:purple)
+call s:hi_group_without_attr('PmenuKind', s:term_cyan, s:term_bg, s:cyan, s:bg)
+call s:hi_group_without_attr('PmenuKind', s:term_purple, s:term_bg, s:purple, s:bg)
+call s:hi_group_without_attr('PmenuExtra', s:term_fg, s:term_bg, s:fg, s:bg)
+call s:hi_group_without_attr('PmenuExtraSel', s:term_fg, s:term_purple, s:fg, s:purple)
 
-call s:hi_group_without_attr('Folded', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group_without_attr('Normal', s:fg2, s:bg2, s:fg, s:bg)
-call s:hi_group_without_attr('LineNr', s:comment2, s:bg2, s:comment, s:bg)
-call s:hi_group_without_attr('Visual',  s:none, s:selection2, s:none, s:selection)
-call s:hi_group_without_attr('VisualNOS',  s:none, s:selection2, s:none, s:selection)
-call s:hi_group_without_attr('IncSearch', s:bg2, s:yellow2, s:bg, s:yellow)
-call s:hi_group_without_attr('VertSplit', s:black2, s:bg2, s:black, s:bg)
+call s:hi_group_without_attr('Folded', s:term_fg, s:term_bg, s:fg, s:bg)
+call s:hi_group_without_attr('Normal', s:term_fg, s:term_bg, s:fg, s:bg)
+call s:hi_group_without_attr('LineNr', s:term_comment, s:term_bg, s:comment, s:bg)
+call s:hi_group_without_attr('Visual',  s:none, s:term_selection, s:none, s:selection)
+call s:hi_group_without_attr('VisualNOS',  s:none, s:term_selection, s:none, s:selection)
+call s:hi_group_without_attr('IncSearch', s:term_bg, s:term_yellow, s:bg, s:yellow)
+call s:hi_group_without_attr('VertSplit', s:term_black, s:term_bg, s:black, s:bg)
 
-call s:hi_group('Directory', s:blue2, s:none, s:blue, s:none, ['bold'])
-call s:hi_group('Search', s:bg2, s:yellow2, s:bg, s:yellow, ['underline'])
-call s:hi_group('MatchParen', s:yellow2, 'NONE', s:yellow, 'NONE', ['underline'])
+call s:hi_group('Directory', s:term_blue, s:none, s:blue, s:none, ['bold'])
+call s:hi_group('Search', s:term_bg, s:term_yellow, s:bg, s:yellow, ['underline'])
+call s:hi_group('MatchParen', s:term_yellow, 'NONE', s:yellow, 'NONE', ['underline'])
 
 if g:hardhacker_hide_tilde == 1
-    call s:hi_group_without_attr('EndOfBuffer', s:bg2, s:bg2, s:bg, s:bg) 
+    call s:hi_group_without_attr('EndOfBuffer', s:term_bg, s:term_bg, s:bg, s:bg) 
 else 
-    call s:hi_group_without_attr('EndOfBuffer', s:comment2, s:bg2, s:comment, s:bg) 
+    call s:hi_group_without_attr('EndOfBuffer', s:term_comment, s:term_bg, s:comment, s:bg) 
 endif
 
 
@@ -196,55 +196,55 @@ function s:hi_bg_group(group, ctermbg, guibg)
 endfunction
 
 " foreground color
-call s:hi_fg_group('HardHackerRed', s:red2, s:red)
-call s:hi_fg_group('HardHackerPurple', s:purple2, s:purple)
-call s:hi_fg_group('HardHackerBlue', s:blue2,s:blue)
-call s:hi_fg_group('HardHackerYellow', s:yellow2, s:yellow)
-call s:hi_fg_group('HardHackerCyan',s:cyan2, s:cyan)
-call s:hi_fg_group('HardHackerGreen', s:green2, s:green)
-call s:hi_fg_group('HardHackerFg', s:fg2, s:fg)
-call s:hi_fg_group('HardHackerComment',s:comment2, s:comment)
+call s:hi_fg_group('HardHackerRed', s:term_red, s:red)
+call s:hi_fg_group('HardHackerPurple', s:term_purple, s:purple)
+call s:hi_fg_group('HardHackerBlue', s:term_blue,s:blue)
+call s:hi_fg_group('HardHackerYellow', s:term_yellow, s:yellow)
+call s:hi_fg_group('HardHackerCyan',s:term_cyan, s:cyan)
+call s:hi_fg_group('HardHackerGreen', s:term_green, s:green)
+call s:hi_fg_group('HardHackerFg', s:term_fg, s:fg)
+call s:hi_fg_group('HardHackerComment',s:term_comment, s:comment)
 
-call s:hi_fg_group('HardHackerBorder',s:comment2, s:comment)
+call s:hi_fg_group('HardHackerBorder',s:term_comment, s:comment)
 
 " foreground color + bold 
-call s:hi_fg_group('HardHackerRedBold', s:red2, s:red, 'bold')
+call s:hi_fg_group('HardHackerRedBold', s:term_red, s:red, 'bold')
 
 " foreground color + underline
-call s:hi_fg_group('HardHackerRedUnderline', s:red2, s:red, 'underline')
-call s:hi_fg_group('HardHackerPurpleUnderline', s:purple2, s:purple, 'underline')
-call s:hi_fg_group('HardHackerBlueUnderline', s:blue2,s:blue, 'underline')
-call s:hi_fg_group('HardHackerYellowUnderline', s:yellow2, s:yellow, 'underline')
-call s:hi_fg_group('HardHackerCyanUnderline',s:cyan2, s:cyan, 'underline')
-call s:hi_fg_group('HardHackerGreenUnderline', s:green2, s:green, 'underline')
-call s:hi_fg_group('HardHackerFgUnderline', s:fg2, s:fg, 'underline')
-call s:hi_fg_group('HardHackerCommentUnderline',s:comment2, s:comment, 'underline')
+call s:hi_fg_group('HardHackerRedUnderline', s:term_red, s:red, 'underline')
+call s:hi_fg_group('HardHackerPurpleUnderline', s:term_purple, s:purple, 'underline')
+call s:hi_fg_group('HardHackerBlueUnderline', s:term_blue,s:blue, 'underline')
+call s:hi_fg_group('HardHackerYellowUnderline', s:term_yellow, s:yellow, 'underline')
+call s:hi_fg_group('HardHackerCyanUnderline',s:term_cyan, s:cyan, 'underline')
+call s:hi_fg_group('HardHackerGreenUnderline', s:term_green, s:green, 'underline')
+call s:hi_fg_group('HardHackerFgUnderline', s:term_fg, s:fg, 'underline')
+call s:hi_fg_group('HardHackerCommentUnderline',s:term_comment, s:comment, 'underline')
 
 " foreground color + italic
-call s:hi_fg_group('HardHackerCommentItalic',s:comment2, s:comment, 'italic')
-call s:hi_fg_group('HardHackerBlueItalic', s:blue2, s:blue, 'italic')
+call s:hi_fg_group('HardHackerCommentItalic',s:term_comment, s:comment, 'italic')
+call s:hi_fg_group('HardHackerBlueItalic', s:term_blue, s:blue, 'italic')
 
 " background color
-call s:hi_bg_group('HardHackerBg', s:bg2, s:bg)
-call s:hi_bg_group('HardHackerSelection', s:selection2, s:selection)
+call s:hi_bg_group('HardHackerBg', s:term_bg, s:bg)
+call s:hi_bg_group('HardHackerSelection', s:term_selection, s:selection)
 
 " foreground + background color
 "
-call s:hi_group_without_attr('HardHackerBlackYellow', s:black2, s:yellow2, s:black, s:yellow)
-call s:hi_group_without_attr('HardHackerWhiteRed', s:fg2, s:red2, s:fg, s:red)
-call s:hi_group_without_attr('HardHackerGreenSelection', s:green2, s:selection2, s:green, s:selection)
-call s:hi_group_without_attr('HardHackerRedSelection', s:red2, s:selection2, s:red, s:selection)
-call s:hi_group_without_attr('HardHackerYellowSelection', s:yellow2, s:selection2, s:yellow, s:selection)
+call s:hi_group_without_attr('HardHackerBlackYellow', s:term_black, s:term_yellow, s:black, s:yellow)
+call s:hi_group_without_attr('HardHackerWhiteRed', s:term_fg, s:term_red, s:fg, s:red)
+call s:hi_group_without_attr('HardHackerGreenSelection', s:term_green, s:term_selection, s:green, s:selection)
+call s:hi_group_without_attr('HardHackerRedSelection', s:term_red, s:term_selection, s:red, s:selection)
+call s:hi_group_without_attr('HardHackerYellowSelection', s:term_yellow, s:term_selection, s:yellow, s:selection)
 
 " foreground + background blend
-call s:hi_group_without_attr('HardHackerPurplePurple', s:purple2, s:comment2, s:purple, s:blend_colors(s:purple, s:bg, 10))
-call s:hi_group_without_attr('HardHackerRedRed', s:red2, s:comment2, s:red, s:blend_colors(s:red, s:bg, 10))
-call s:hi_group_without_attr('HardHackerCyanCyan', s:cyan2, s:comment2, s:cyan, s:blend_colors(s:cyan, s:bg, 10))
-call s:hi_group_without_attr('HardHackerRedRed', s:red2, s:comment2, s:red, s:blend_colors(s:red, s:bg, 10))
-call s:hi_group_without_attr('HardHackerYellowYellow', s:yellow2, s:comment2, s:yellow, s:blend_colors(s:yellow, s:bg, 10))
+call s:hi_group_without_attr('HardHackerPurplePurple', s:term_purple, s:term_comment, s:purple, s:blend_colors(s:purple, s:bg, 10))
+call s:hi_group_without_attr('HardHackerRedRed', s:term_red, s:term_comment, s:red, s:blend_colors(s:red, s:bg, 10))
+call s:hi_group_without_attr('HardHackerCyanCyan', s:term_cyan, s:term_comment, s:cyan, s:blend_colors(s:cyan, s:bg, 10))
+call s:hi_group_without_attr('HardHackerRedRed', s:term_red, s:term_comment, s:red, s:blend_colors(s:red, s:bg, 10))
+call s:hi_group_without_attr('HardHackerYellowYellow', s:term_yellow, s:term_comment, s:yellow, s:blend_colors(s:yellow, s:bg, 10))
 
 " black + black
-call s:hi_group_without_attr('HardHackerFillDarker', s:bg2_darker, s:bg2_darker, '#1e1b26', '#1e1b26')
+call s:hi_group_without_attr('HardHackerFillDarker', s:term_bg_darker, s:term_bg_darker, '#1e1b26', '#1e1b26')
 
 hi! link Comment        HardHackerCommentItalic
 hi! link String         HardHackerGreen
@@ -307,16 +307,7 @@ hi! link Error          HardHackerBlackYellow
 hi! link ErrorMsg       Error
 
 execute 'hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline'
-execute 'hi Todo ctermfg='.s:yellow2.' ctermbg=NONE cterm=inverse,bold guifg='.s:yellow.' guibg=NONE gui=inverse,bold,italic'
-
-function s:is_valid(...)
-    if ! exists('s:lualine_colors_name') || s:lualine_colors_name !=# 'hardhacker'
-        return 0
-    elseif a:0 > 0 && (exists('b:current_syntax') && index(a:000, b:current_syntax) != -1)
-        return 1
-    endif
-    return 0
-endfunction
+execute 'hi Todo ctermfg='.s:term_yellow.' ctermbg=NONE cterm=inverse,bold guifg='.s:yellow.' guibg=NONE gui=inverse,bold,italic'
 
 if has('nvim')
     hi! link DiagnosticOk               HardHackerGreen
@@ -502,4 +493,20 @@ let s:lualine_theme = {
       \ }
 
 let g:hardhacker_lualine_theme = s:lualine_theme
+
+" Barbecue theme
+"
+let s:hardhacker_barbecue_theme = {
+      \ 'normal': { 'fg': s:comment },
+      \
+      \ 'ellipsis': { 'fg': s:comment },
+      \ 'separator': { 'fg': s:comment },
+      \ 'modified': { 'fg': s:comment },
+      \
+      \ 'dirname': { 'fg': s:comment },
+      \ 'basename': { 'bold': v:false },
+      \ 'context': {},
+      \ }
+
+let g:hardhacker_barbecue_theme = s:hardhacker_barbecue_theme
 
