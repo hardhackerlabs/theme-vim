@@ -217,6 +217,7 @@ call s:hi_without_attr('Visual',  s:none, s:term_selection, s:none, s:selection)
 call s:hi_without_attr('VisualNOS',  s:none, s:term_selection, s:none, s:selection)
 call s:hi_without_attr('IncSearch', s:term_bg, s:term_yellow, s:bg, s:yellow)
 call s:hi_without_attr('VertSplit', s:term_black, s:term_bg, s:black, s:bg)
+call s:hi_without_attr('Conceal', s:term_comment, s:none, s:comment, s:none)
 
 call s:hi('Directory', s:term_blue, s:none, s:blue, s:none, ['bold'])
 call s:hi('Search', s:term_bg, s:term_yellow, s:bg, s:yellow, ['underline'])
