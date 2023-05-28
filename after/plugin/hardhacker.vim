@@ -49,13 +49,13 @@ if has('nvim') && luaeval("pcall(require, 'bufferline')")
 endif
 
 " telescope
-if has('nvim') && luaeval("pcall(require, 'telescope')")
+if has('nvim') && exists("g:loaded_telescope")
     hi! link TelescopeTitle     Title
     hi! link TelescopeBorder    HardHackerBorder
 endif
 
 " neo-tree
-if has('nvim') && luaeval("pcall(require, 'neo-tree')")
+if has('nvim') && exists("g:loaded_neo_tree")
     hi! link NeoTreeGitAdded        HardHackerGreen
     hi! link NeoTreeGitDeleted      HardHackerRed
     hi! link NeoTreeGitModified     HardHackerYellow
@@ -81,7 +81,7 @@ if has('nvim') && luaeval("pcall(require, 'dashboard')")
 endif
 
 " nvim-cmp
-if has('nvim') && luaeval("pcall(require, 'cmp')")
+if has('nvim') && exists("g:loaded_cmp")
     hi! link CmpItemKindDefault         Type
     hi! link CmpItemAbbrMatchDefault    HardHackerPurple
 endif
@@ -100,4 +100,11 @@ endif
 if has('nvim') && luaeval("pcall(require, 'toggleterm')")
     hi! link ToggleTerm1EndOfBuffer  EndOfBuffer
     hi! link ToggleTerm1SignColumn   EndOfBuffer
+endif
+
+if has('nvim') && luaeval("pcall(require, 'null-ls')")
+    hi! link NullLsInfoBorder   FloatBorder
+    hi! link NullLsInfoHeader   Type
+    hi! link NullLsInfoTitle    Title
+    hi! link NullLsInfoSources  Label
 endif

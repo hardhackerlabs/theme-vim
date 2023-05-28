@@ -14,6 +14,7 @@ if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolo
   finish
 endif
 
+
 " Global variable
 "
 if !exists('g:hardhacker_darker')
@@ -25,6 +26,7 @@ endif
 if !exists('g:hardhacker_keyword_italic')
     let g:hardhacker_keyword_italic = 1
 endif
+
 
 " Highlight utils
 "
@@ -83,7 +85,6 @@ function s:hi_bg(group, ctermbg, guibg)
 endfunction
 
 
-
 " Palette
 "
 let s:black             = '#19181f'
@@ -122,6 +123,7 @@ if g:hardhacker_darker == 1
     let s:bg = s:bg_darker
     let s:term_bg = s:term_bg_darker
 endif
+
 
 " For terminal
 let g:hardhacker#palette = {}
@@ -167,7 +169,7 @@ call s:hi_fg('HardHackerCyan',s:term_cyan, s:cyan)
 call s:hi_fg('HardHackerGreen', s:term_green, s:green)
 call s:hi_fg('HardHackerFg', s:term_fg, s:fg)
 call s:hi_fg('HardHackerComment',s:term_comment, s:comment)
-call s:hi_fg('HardHackerBorder',s:term_comment, s:comment)
+call s:hi_fg('HardHackerBorder',s:term_comment, s:blend_colors(s:red, s:bg, 30))
 " background color
 call s:hi_bg('HardHackerBg', s:term_bg, s:bg)
 call s:hi_bg('HardHackerSelection', s:term_selection, s:selection)
@@ -210,7 +212,7 @@ call s:hi_without_attr('PmenuKind', s:term_purple, s:term_bg, s:purple, s:bg)
 call s:hi_without_attr('PmenuExtra', s:term_fg, s:term_bg, s:fg, s:bg)
 call s:hi_without_attr('PmenuExtraSel', s:term_fg, s:term_purple, s:fg, s:purple)
 
-call s:hi_without_attr('Folded', s:term_fg, s:term_bg, s:fg, s:bg)
+call s:hi_without_attr('Folded', s:term_blue, s:term_bg, s:blue2, s:bg)
 call s:hi_without_attr('Normal', s:term_fg, s:term_bg, s:fg, s:bg)
 call s:hi_without_attr('LineNr', s:term_comment, s:term_bg, s:comment, s:bg)
 call s:hi_without_attr('Visual',  s:none, s:term_selection, s:none, s:selection)
@@ -228,6 +230,24 @@ if g:hardhacker_hide_tilde == 1
 else 
     call s:hi_without_attr('EndOfBuffer', s:term_comment, s:term_bg, s:comment, s:bg) 
 endif
+
+call s:hi_fg('Title', s:term_red, s:red, 'bold')
+call s:hi_fg('Underlined', s:none, s:none, 'underline')
+call s:hi_fg('Todo', s:term_yellow, s:yellow, 'inverse', 'bold', 'italic')
+
+hi! link TabLine        Normal
+hi! link TabLineFill    HardHackerBg
+hi! link TabLineSel     HardHackerRed
+
+hi! link QuickFixLine   HardHackerPurplePurple
+hi! link MoreMsg        HardHackerBlue
+hi! link Question       HardHackerBlue
+hi! link NonText        EndOfBuffer
+hi! link SignColumn     HardHackerComment
+hi! link WarningMsg     HardHackerYellow
+hi! link Error          HardHackerRed
+hi! link ErrorMsg       Error
+
 
 " Set syntax highlight
 "
@@ -277,22 +297,8 @@ hi! link DiffRemoved    DiffDelete
 hi! link DiffText       HardHackerBlackYellow
 hi! link DiffChange     HardHackerYellowSelection
 
-hi! link TabLine        Normal
-hi! link TabLineFill    HardHackerBg
-hi! link TabLineSel     HardHackerRed
-
-hi! link MoreMsg        HardHackerBlue
-hi! link Question       HardHackerBlue
-hi! link NonText        EndOfBuffer
-hi! link SignColumn     HardHackerComment
-hi! link WarningMsg     HardHackerYellow
-hi! link Error          HardHackerRed
-hi! link ErrorMsg       Error
-
 call s:hi_fg('Comment',s:term_comment, s:comment, 'italic')
-call s:hi_fg('Title', s:term_red, s:red, 'bold')
-call s:hi_fg('Underlined', s:none, s:none, 'underline')
-call s:hi_fg('Todo', s:term_yellow, s:yellow, 'inverse', 'bold', 'italic')
+
 
 " Set neovim-only highlight
 "
@@ -347,6 +353,7 @@ if has('nvim')
 
     hi! link NvimInternalError      Error
 endif
+
 
 " SYNTAX
 "
