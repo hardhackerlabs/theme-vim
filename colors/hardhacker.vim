@@ -15,6 +15,19 @@ if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolo
 endif
 
 
+" Set autocmd to exec 'highlight' in after dir.
+augroup HardHackerThemeOverride
+    autocmd!
+    autocmd ColorScheme * call s:Override()
+
+    function! s:Override()
+        if exists(':HardHackerAfterHighlight')
+            HardHackerAfterHighlight
+        endif
+    endfunction
+augroup END
+
+
 " Global variable
 "
 if !exists('g:hardhacker_darker')
@@ -49,7 +62,7 @@ function! s:blend_colors(foreground_color, background_color, opacity)
 endfunction
 
 function s:hi(group, termfg, termbg, guifg, guibg, list)
-    let l:attr = 'NONE'
+    let l:attr = 'NONE'  
     if has('nvim')
         let l:attr = join(a:list, ',')
     endif
