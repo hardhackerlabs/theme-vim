@@ -226,6 +226,7 @@ call s:hi_without_attr('PmenuExtra', s:term_fg, s:term_bg, s:fg, s:bg)
 call s:hi_without_attr('PmenuExtraSel', s:term_fg, s:term_purple, s:fg, s:purple)
 
 call s:hi_without_attr('Folded', s:term_blue, s:term_bg, s:blue2, s:bg)
+call s:hi_without_attr('FoldColumn', s:term_blue, s:term_bg, s:red, s:bg)
 call s:hi_without_attr('Normal', s:term_fg, s:term_bg, s:fg, s:bg)
 call s:hi_without_attr('LineNr', s:term_comment, s:term_bg, s:comment, s:bg)
 call s:hi_without_attr('Visual',  s:none, s:term_selection, s:none, s:selection)
