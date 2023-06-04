@@ -29,11 +29,17 @@ augroup END
 
 " Global variable
 "
+" set 1 to hide tilde
 if !exists('g:hardhacker_hide_tilde')
     let g:hardhacker_hide_tilde = 1
 endif
+" set 1 to make keyword to italic
 if !exists('g:hardhacker_keyword_italic')
     let g:hardhacker_keyword_italic = 1
+endif
+" store all custom highlights
+if !exists('g:hardhacker_custom_highlights')
+    let g:hardhacker_custom_highlights = []
 endif
 
 

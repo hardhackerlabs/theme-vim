@@ -107,3 +107,10 @@ endfunction
 
 command! HardHackerAfterHighlight call s:AfterHighlight()
 call s:AfterHighlight()
+
+" Execute all custom highlights
+if exists('g:hardhacker_custom_highlights')
+    for item in g:hardhacker_custom_highlights
+      execute item
+    endfor
+endif
