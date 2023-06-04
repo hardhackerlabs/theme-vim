@@ -212,7 +212,7 @@ call s:hi_without_attr('PmenuExtra', s:term_fg, s:term_bg, s:fg, s:bg)
 call s:hi_without_attr('PmenuExtraSel', s:term_fg, s:term_purple, s:fg, s:purple)
 
 call s:hi_without_attr('Folded', s:term_blue2, s:term_bg, s:blue2, s:bg)
-call s:hi_without_attr('FoldColumn', s:term_red, s:term_bg, s:red, s:bg)
+call s:hi_without_attr('FoldColumn', s:term_comment, s:term_bg, s:comment, s:bg)
 call s:hi_without_attr('Normal', s:term_fg, s:term_bg, s:fg, s:bg)
 call s:hi_without_attr('LineNr', s:term_comment, s:term_bg, s:comment, s:bg)
 call s:hi_without_attr('Visual',  s:none, s:term_selection, s:none, s:selection)
@@ -456,13 +456,13 @@ hi! link shEscape HardHackerRed
 "
 let s:lualine_theme = {
       \ 'normal': {
-          \ 'a': { 'fg': s:black, 'bg': s:purple },
-          \ 'b': { 'fg': s:red, 'bg': s:bg },
+          \ 'a': { 'fg': s:selection, 'bg': s:purple },
+          \ 'b': { 'fg': s:red, 'bg': s:selection },
           \ 'c': { 'fg': s:comment, 'bg': s:bg },
           \ },
-      \ 'insert': { 'a': { 'fg': s:black, 'bg': s:green } },
-      \ 'visual': { 'a': { 'fg': s:black, 'bg': s:yellow } },
-      \ 'replace': { 'a': { 'fg': s:black, 'bg': s:red } },
+      \ 'insert': { 'a': { 'fg': s:selection, 'bg': s:green } },
+      \ 'visual': { 'a': { 'fg': s:selection, 'bg': s:yellow } },
+      \ 'replace': { 'a': { 'fg': s:selection, 'bg': s:red } },
       \ 'inactive': {
           \ 'a': { 'fg': s:fg, 'bg': s:bg },
           \ 'b': { 'fg': s:fg, 'bg': s:bg },
@@ -482,7 +482,7 @@ let s:hardhacker_barbecue_theme = {
       \ 'modified': { 'fg': s:comment },
       \
       \ 'dirname': { 'fg': s:comment },
-      \ 'basename': { 'bold': v:false },
+      \ 'basename': { 'bold': v:true }, 
       \ 'context': {},
       \ }
 
