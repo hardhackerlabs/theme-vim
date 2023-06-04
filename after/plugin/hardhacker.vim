@@ -39,14 +39,8 @@ function! s:AfterHighlight()
 
     " bufferline
     if has('nvim') && luaeval("pcall(require, 'bufferline')")
-        hi! link BufferLineFill                 HardHackerFillDarker
+        hi! link BufferLineFill                 TabLineFill
         hi! link BufferLineOffsetSeparator      VertSplit
-        " hi! link BufferLineGroupSeparator       HardHackerFillDarker
-        " hi! link BufferLineSeparator            HardHackerFillDarker
-        " hi! link BufferLineTabSeparator         HardHackerFillDarker
-        " hi! link BufferLineTabSeparatorSelected HardHackerFillDarker
-        " hi! link BufferLineSeparatorSelected    HardHackerFillDarker
-        " hi! link BufferLineSeparatorVisible     HardHackerFillDarker
     endif
 
     " telescope
