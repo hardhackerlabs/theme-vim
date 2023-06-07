@@ -82,8 +82,5 @@ Add the following configuration to the `~/.vimrc` or `~/.config/nvim/init.vim` f
 syntax      enable
 syntax      on
 set         t_Co=256
-" let g:hardhacker_darker = 1
 colorscheme hardhacker
 ```
-
-This theme is dark by default, if you set the variable `g:hardhacker_darcker` to 1, you will get a darker theme

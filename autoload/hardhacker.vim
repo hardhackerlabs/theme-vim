@@ -113,8 +113,8 @@ let s:blue              = '#b1baf4'
 let s:blue2             = '#8f94c4'
 let s:purple            = '#e192ef'
 let s:cyan              = '#b3f4f3'
-let s:black             = '#1e1b26'
-let s:black2            = '#0f0d13'
+let s:black             = s:blend_colors(s:bg, '#000000', 80)
+let s:black2            = s:blend_colors(s:bg, '#000000', 70)
 
 let s:term_bg           = g:hardhacker#palette_term_bg
 let s:term_fg           = '255'
