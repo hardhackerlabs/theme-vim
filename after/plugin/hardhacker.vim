@@ -104,7 +104,6 @@ function! s:AfterHighlight()
         hi! link NullLsInfoSources  Label
     endif
 
-
     " tree-sitter highlights
     if has('nvim')
         " Misc
@@ -191,14 +190,14 @@ function! s:AfterHighlight()
         hi! link @lsp.typemod.variable.defaultLibrary   @variable.builtin
         hi! link @lsp.typemod.variable.injected         @variable
     endif
+
+    " Execute all custom highlights
+    if exists('g:hardhacker_custom_highlights')
+        for item in g:hardhacker_custom_highlights
+          execute item
+        endfor
+    endif
 endfunction
 
 command! HardHackerAfterHighlight call s:AfterHighlight()
 call s:AfterHighlight()
-
-" Execute all custom highlights
-if exists('g:hardhacker_custom_highlights')
-    for item in g:hardhacker_custom_highlights
-      execute item
-    endfor
-endif

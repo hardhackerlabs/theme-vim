@@ -7,6 +7,8 @@ if exists('syntax_on')
   syntax reset
 endif
 
+
+let g:colors_name = 'hardhacker'
 set background=dark
 
 if !has('gui_running') && &t_Co != 256 && !(has('termguicolors') && &termguicolors)
@@ -20,8 +22,10 @@ augroup HardHackerThemeOverride
     autocmd ColorScheme * call s:Override()
 
     function! s:Override()
-        if exists(':HardHackerAfterHighlight')
-            HardHackerAfterHighlight
+        if exists(':HardHackerAfterHighlight') && exists('g:colors_name') && !empty(g:colors_name)
+            if g:colors_name == 'hardhacker'
+                HardHackerAfterHighlight
+            endif
         endif
     endfunction
 augroup END
@@ -296,12 +300,12 @@ hi! link Include        HardHackerBlue
 hi! link Typedef        HardHackerCyan
 hi! link PreProc        HardHackerPurple
 
-hi! link DiffAdd        HardHackerGreenSelection
+hi! link DiffAdd        HardHackerGreen
 hi! link DiffAdded      DiffAdd
-hi! link DiffDelete     HardHackerRedSelection
+hi! link DiffDelete     HardHackerRed
 hi! link DiffRemoved    DiffDelete
-hi! link DiffText       HardHackerBlackYellow
-hi! link DiffChange     HardHackerYellowSelection
+hi! link DiffText       HardHackerBlack
+hi! link DiffChange     HardHackerYellow
 
 call s:hi_fg('Comment',s:term_comment, s:comment, 'italic')
 
