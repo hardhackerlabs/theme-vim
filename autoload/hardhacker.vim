@@ -300,12 +300,12 @@ hi! link Include        HardHackerBlue
 hi! link Typedef        HardHackerCyan
 hi! link PreProc        HardHackerPurple
 
-hi! link DiffAdd        HardHackerGreen
+hi! link DiffAdd        HardHackerGreenSelection
 hi! link DiffAdded      DiffAdd
-hi! link DiffDelete     HardHackerRed
+hi! link DiffDelete     HardHackerRedSelection
 hi! link DiffRemoved    DiffDelete
-hi! link DiffText       HardHackerBlack
-hi! link DiffChange     HardHackerYellow
+hi! link DiffText       HardHackerBlackYellow
+hi! link DiffChange     HardHackerYellowSelection
 
 call s:hi_fg('Comment',s:term_comment, s:comment, 'italic')
 

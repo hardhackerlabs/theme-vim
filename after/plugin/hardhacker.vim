@@ -20,19 +20,19 @@ function! s:AfterHighlight()
 
     " gitgutter gitsigns
     if exists('g:loaded_gitgutter')
-        hi! link GitGutterAdd    DiffAdd
-        hi! link GitGutterChange DiffChange
-        hi! link GitGutterDelete DiffDelete
+        hi! link GitGutterAdd    HardHackerGreen
+        hi! link GitGutterChange HardHackerYellow
+        hi! link GitGutterDelete HardHackerRed
     endif
     if has('nvim') && luaeval("pcall(require, 'gitsigns')")
         " gitsigns.nvim requires nvim > 0.5
-        hi! link GitSignsAdd      DiffAdd
+        hi! link GitSignsAdd      HardHackerGreen
         hi! link GitSignsAddLn    GitSignsAdd
         hi! link GitSignsAddNr    GitSignsAdd
-        hi! link GitSignsChange   DiffChange
+        hi! link GitSignsChange   HardHackerYellow
         hi! link GitSignsChangeLn GitSignsChange
         hi! link GitSignsChangeNr GitSignsChange
-        hi! link GitSignsDelete   DiffDelete
+        hi! link GitSignsDelete   HardHackerRed
         hi! link GitSignsDeleteLn GitSignsDelete
         hi! link GitSignsDeleteNr GitSignsDelete
     endif
@@ -44,13 +44,13 @@ function! s:AfterHighlight()
     endif
 
     " telescope
-    if has('nvim') && exists("g:loaded_telescope")
+    if has('nvim') && exists('g:loaded_telescope')
         hi! link TelescopeTitle     Title
         hi! link TelescopeBorder    HardHackerBorder
     endif
 
     " neo-tree
-    if has('nvim') && exists("g:loaded_neo_tree")
+    if has('nvim') && exists('g:loaded_neo_tree')
         hi! link NeoTreeGitAdded        HardHackerGreen
         hi! link NeoTreeGitDeleted      HardHackerRed
         hi! link NeoTreeGitModified     HardHackerYellow
@@ -76,7 +76,7 @@ function! s:AfterHighlight()
     endif
 
     " nvim-cmp
-    if has('nvim') && exists("g:loaded_cmp")
+    if has('nvim') && exists('g:loaded_cmp')
         hi! link CmpItemKindDefault         Type
         hi! link CmpItemAbbrMatchDefault    HardHackerPurple
     endif
