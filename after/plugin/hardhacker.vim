@@ -82,8 +82,9 @@ function! s:AfterHighlight()
     endif
 
     if has('nvim') && luaeval("pcall(require, 'aerial')")
-        hi! link AerialLine  HardHackerRed
-        hi! link NONE        HardHackerBlue2
+        hi! link AerialLine   HardHackerBlue
+        hi! link AerialNormal HardHackerBlue2
+        hi! link NONE         HardHackerBlue2
     endif
 
     if has('nvim') && luaeval("pcall(require, 'noice')")

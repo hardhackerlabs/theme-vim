@@ -23,7 +23,7 @@ augroup HardHackerThemeOverride
 
     function! s:Override()
         if exists(':HardHackerAfterHighlight') && exists('g:colors_name') && !empty(g:colors_name)
-            if g:colors_name == 'hardhacker'
+            if g:colors_name ==# 'hardhacker'
                 HardHackerAfterHighlight
             endif
         endif
@@ -114,9 +114,11 @@ let s:red               = '#e965a5'
 let s:green             = '#b1f2a7'
 let s:yellow            = '#ebde76'
 let s:blue              = '#b1baf4'
-let s:blue2             = '#8f94c4'
+let s:blue2             = s:blend_colors(s:blue, '#000000', 70)
 let s:purple            = '#e192ef'
+let s:purple2           = '#BD93F9'
 let s:cyan              = '#b3f4f3'
+let s:cyan2             = s:blend_colors(s:cyan, '#000000', 60)
 let s:black             = s:blend_colors(s:bg, '#000000', 80)
 let s:black2            = s:blend_colors(s:bg, '#000000', 70)
 
@@ -173,10 +175,12 @@ endif
 " foreground color
 call s:hi_fg('HardHackerRed', s:term_red, s:red)
 call s:hi_fg('HardHackerPurple', s:term_purple, s:purple)
+call s:hi_fg('HardHackerPurple2', s:term_purple, s:purple2)
 call s:hi_fg('HardHackerBlue', s:term_blue, s:blue)
 call s:hi_fg('HardHackerBlue2', s:term_blue2, s:blue2)
 call s:hi_fg('HardHackerYellow', s:term_yellow, s:yellow)
 call s:hi_fg('HardHackerCyan',s:term_cyan, s:cyan)
+call s:hi_fg('HardHackerCyan2',s:term_cyan, s:cyan2)
 call s:hi_fg('HardHackerGreen', s:term_green, s:green)
 call s:hi_fg('HardHackerFg', s:term_fg, s:fg)
 call s:hi_fg('HardHackerComment',s:term_comment, s:comment)
@@ -262,7 +266,7 @@ hi! link ErrorMsg       Error
 " Set syntax highlight
 "
 hi! link String         HardHackerGreen
-hi! link Constant       HardHackerPurple
+hi! link Constant       HardHackerYellow
 hi! link Character      HardHackerYellow
 hi! link Number         HardHackerYellow
 hi! link Boolean        HardHackerYellow
@@ -271,12 +275,12 @@ hi! link Float          HardHackerYellow
 hi! link Function       HardHackerRed
 hi! link Identifier     HardHackerPurple
 
-hi! link Exception      HardHackerBlue
-hi! link Repeat         HardHackerBlue
-hi! link Statement      HardHackerBlue
-hi! link Conditional    HardHackerBlue
-hi! link Label          HardHackerBlue
-hi! link Operator       HardHackerBlue  
+hi! link Exception      Keyword
+hi! link Repeat         Keyword
+hi! link Statement      Keyword
+hi! link Conditional    Keyword
+hi! link Label          keyword
+hi! link Operator       HardHackerBlue
 
 if g:hardhacker_keyword_italic == 1 
     call s:hi_fg('Keyword', s:term_blue, s:blue, 'italic')
@@ -289,8 +293,8 @@ hi! link Delimiter      HardHackerFg
 
 hi! link Tag            HardHackerCyan
 hi! link Define         HardHackerCyan
-hi! link Special        HardHackerPurple
-hi! link SpecialKey     HardHackerPurple
+hi! link Special        HardHackerYellow
+hi! link SpecialKey     HardHackerYellow
 hi! link SpecialComment HardHackerCyan
 hi! link StorageClass   HardHackerCyan
 hi! link Structure      HardHackerCyan
